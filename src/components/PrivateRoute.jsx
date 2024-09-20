@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 function PrivateRoute() {
     const { isAuthenticated } = useAuth();
 
+    
     if (isAuthenticated) {
         return <Outlet />;
     } else {

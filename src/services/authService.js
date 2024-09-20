@@ -7,7 +7,7 @@ export const authService = {
             const response = await axios.post('auth/login', credentials)
             return response
         } catch (error) {
-            console.warn('Error:' + error);
+            console.warn('Error: ' + error);
 
         }
 

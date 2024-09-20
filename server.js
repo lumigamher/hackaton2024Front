@@ -1,9 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 const app = express();
 const PORT = 3000;
 
+app.use(cors()); // Habilita CORS para todas las rutas
 app.use(bodyParser.json());
 
 // Simulamos una base de datos de usuarios
@@ -17,9 +19,16 @@ app.post('/auth/login', (req, res) => {
     const user = users.find(u => u.username === username && u.password === password);
 
     if (user) {
-        return res.json({ token: user.token });
+        return res.status(200).json({
+            status: 'success',
+            message: 'Login successful',
+            token: user.token 
+        });
     } else {
-        return res.status(401).json({ message: 'Credenciales inválidas' });
+        return res.status(401).json({
+            status: 'error',
+            message: 'Invalid credentials',
+        });
     }
 });
 

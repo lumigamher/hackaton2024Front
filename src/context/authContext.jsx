@@ -1,28 +1,44 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { authService } from "../services/authService";
+import { useNavigate } from "react-router-dom";
+
 
 const AuthContext = createContext();
 
+
 export const AuthProvider = ({ children }) => {
 
+    const navigate = useNavigate()
     const [token, setToken] = useState(null)
-    const [isAutenticated, setIsAutenticated] = useState(false)
+    const [isAuthenticated, setisAuthenticated] = useState(false)
 
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            setisAuthenticated(true);
+        } else {
+            setisAuthenticated(false);
+        }
+    }, [])
+    
     const login = async (credentials) => {
         const response = await authService.login(credentials)
-        if (response.token) {
-            setToken(response.token)
-            localStorage.setItem('token', response.token)
-            setIsAutenticated(true)
+
+        if (response.data.token) {
+            setToken(response.data.token)
+            localStorage.setItem('token', response.data.token)
+            setisAuthenticated(true)
+            navigate('/dashboard')
         }
     }
     const logout = () => {
         setToken(null)
         localStorage.removeItem('token')
-        setIsAutenticated(false)
+        setisAuthenticated(false)
     }
     return (
-        <AuthContext.Provider value={{isAutenticated, token, login, logout}}>
+        <AuthContext.Provider value={{isAuthenticated, token, login, logout}}>
             {children}
         </AuthContext.Provider>
     )
