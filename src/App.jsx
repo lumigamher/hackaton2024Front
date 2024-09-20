@@ -1,22 +1,28 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import RegisterPage from './pages/RegisterPage'
-import NotFoundPage from './pages/NotFoundPage'
-
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import LandingPage from './pages/LandingPage';
+import NotFoundPage from './pages/NotFoundPage';
+import PrivateRoute from './components/PrivateRoute';
+import { AuthProvider } from './context/authContext';
 
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <Routes>
-        <Route path='/Register' element={<RegisterPage/>} />
-        <Route path='/Login' element={<RegisterPage/>} />
-        <Route path='/Dashboard' element={<RegisterPage/>} />
-        <Route path='/Landing' element={<RegisterPage/>} />
+        <Route path='/register' element={<RegisterPage />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/dashboard' element={<PrivateRoute />}>
+          <Route path='' element={<DashboardPage />} />
+        </Route>
+        <Route path='/landing' element={<LandingPage />} />
         <Route path='/*' element={<NotFoundPage />} />
       </Routes>
-    </div>
-  )
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
