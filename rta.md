@@ -140,3 +140,16 @@
 | **Despliegue y Documentación** | Día 6     | QA y DevOps, Todos                |
 
 ---
+src/
+├── components/         # Componentes reutilizables
+├── containers/         # Componentes que conectan con lógica de negocio o estados
+├── hooks/              # Hooks personalizados
+├── services/           # Lógica de servicios API o integración externa
+├── context/            # Contextos globales (useContext)
+├── redux/              # Si usas Redux (reducers, actions, etc.)
+├── pages/              # Vistas de páginas
+├── routes/             # Definición de rutas y navegación
+├── assets/             # Imágenes, íconos, fuentes, etc.
+├── styles/             # Estilos globales o por módulos (CSS/SASS/Tailwind)
+├── utils/              # Funciones utilitarias, validaciones, formateadores
+└── App.js              # Punto de entrada principal
