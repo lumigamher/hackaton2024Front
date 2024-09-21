@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import Input from '../components/ui/input';
 import Button from '../components/ui/Button'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Navigate } from 'react-router-dom';
 
 const Toast = Swal.mixin({
   toast: true,
@@ -12,12 +13,13 @@ const Toast = Swal.mixin({
   timer: 3000,
   timerProgressBar: true,
   didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
   }
 });
 
 function LoginPage() {
+  const navigate = useNavigate()
   const { register } = useAuth()
   const [formData, setFormData] = useState({
     username: '',
@@ -48,7 +50,7 @@ function LoginPage() {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (!isMatching) {
       return;
     }
@@ -56,23 +58,20 @@ function LoginPage() {
       username: formData.username,
       password: formData.password,
       email: formData.email,
-      nombre: formData.name,
-      apellido: formData.lastName,
-      telefono: formData.phoneNumber
     };
-    console.log('payload', formData);
-    const response = register(payload)
-    if (response.status == 404) {
+    const response = await register(payload)
+    if (response.status == 200) {
       Toast.fire({
         icon: 'success',
-        title: 'RUser successfully registered'
-    });
+        title: 'User successfully registered'
+      });
+      navigate('/login')
     }
-    
-  
+
+
 
   };
-  
+
 
   const toogleVisibility = () => {
     setisVisible(prev => !prev)

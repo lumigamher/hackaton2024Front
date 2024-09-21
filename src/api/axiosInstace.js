@@ -1,11 +1,10 @@
 import axios from "axios";
 
 const productionURL = ''
-const testURL = 'http://localhost:3000'
+const testURL = 'http://localhost:8080'
 
 const instance = axios.create({
     baseURL: testURL,
-
 })
 
 

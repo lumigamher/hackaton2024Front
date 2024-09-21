@@ -18,7 +18,7 @@ export const authService = {
             const response = await axios.post('/auth/register', credentials)
             return response
         } catch (error) {
-            console.warn('Error during registering: ' + error);
+            console.warn('Error during register: ' + error);
             handleErrors(error)
 
         }
