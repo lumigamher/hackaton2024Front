@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
-
+import Input from '../components/ui/input';
+import Button from '../components/ui/Button'
 
 function LoginPage() {
   const { login } = useAuth()
@@ -17,8 +18,8 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const payload = {
-      'username' : formData.username,
-      'password' : formData.password
+      'username': formData.username,
+      'password': formData.password
     }
     login(payload)
 
@@ -27,21 +28,24 @@ function LoginPage() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
+        <Input
+          placeholder='User'
           type="text"
           name="username"
-          placeholder='Username'
           value={formData.username}
           onChange={handleChange}
+          required
+
         />
-        <input
+        <Input
           type="password"
           name="password"
           placeholder='Password'
           value={formData.password}
           onChange={handleChange}
+          required
         />
-        <button type="submit">Login</button>
+        <Button type='submit'> Login </Button>
       </form>
     </div>
   );
