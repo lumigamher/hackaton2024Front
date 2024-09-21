@@ -14,7 +14,7 @@ const users = [
     { username: 'user2', password: 'pass2', token: 'token456' },
 ];
 
-app.post('auth/login', (req, res) => {
+app.post('/auth/login', (req, res) => {
     const { username, password } = req.body;
     const user = users.find(u => u.username === username && u.password === password);
 

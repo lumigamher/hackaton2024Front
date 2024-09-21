@@ -34,11 +34,7 @@ export const AuthProvider = ({ children }) => {
     }
     const register = async (credentials) => {
         const response = await authService.register(credentials)
-        if (response.status == 200) {
-            return console.log('usuario registrado');
-        } else{
-            return response.status
-        }
+        return response;
     }
     const logout = () => {
         setToken(null)
@@ -46,7 +42,7 @@ export const AuthProvider = ({ children }) => {
         setisAuthenticated(false)
     }
     return (
-        <AuthContext.Provider value={{isAuthenticated, token, login, logout}}>
+        <AuthContext.Provider value={{isAuthenticated, token, login, logout, register}}>
             {children}
         </AuthContext.Provider>
     )

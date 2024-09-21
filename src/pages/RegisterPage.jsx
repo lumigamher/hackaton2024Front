@@ -3,9 +3,22 @@ import { useAuth } from '../hooks/useAuth';
 import Input from '../components/ui/input';
 import Button from '../components/ui/Button'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+  }
+});
 
 function LoginPage() {
-  const { login } = useAuth()
+  const { register } = useAuth()
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -48,7 +61,14 @@ function LoginPage() {
       telefono: formData.phoneNumber
     };
     console.log('payload', formData);
-
+    const response = register(payload)
+    if (response.status == 404) {
+      Toast.fire({
+        icon: 'success',
+        title: 'RUser successfully registered'
+    });
+    }
+    
   
 
   };
