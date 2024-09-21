@@ -18,7 +18,7 @@ function App() {
         <Route path='/dashboard' element={<PrivateRoute />}>
           <Route path='' element={<DashboardPage />} />
         </Route>
-        <Route path='/landing' element={<LandingPage />} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/*' element={<NotFoundPage />} />
       </Routes>
     </AuthProvider>
