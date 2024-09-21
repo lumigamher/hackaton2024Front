@@ -32,6 +32,14 @@ export const AuthProvider = ({ children }) => {
             navigate('/dashboard')
         }
     }
+    const register = async (credentials) => {
+        const response = await authService.register(credentials)
+        if (response.status == 200) {
+            return console.log('usuario registrado');
+        } else{
+            return response.status
+        }
+    }
     const logout = () => {
         setToken(null)
         localStorage.removeItem('token')

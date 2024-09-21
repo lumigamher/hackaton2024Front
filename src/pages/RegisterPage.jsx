@@ -4,11 +4,14 @@ import Input from '../components/ui/input';
 import Button from '../components/ui/Button'
 import { Link } from 'react-router-dom';
 
-
 function LoginPage() {
   const { login } = useAuth()
   const [formData, setFormData] = useState({
     username: '',
+    email: '',
+    name: '',
+    lastName: '',
+    phoneNumber: '',
     password: '',
     repeatPassword: ''
   });
@@ -38,9 +41,14 @@ function LoginPage() {
     }
     const payload = {
       username: formData.username,
-      password: formData.password
+      password: formData.password,
+      email: formData.email,
+      nombre: formData.name,
+      apellido: formData.lastName,
+      telefono: formData.phoneNumber
     };
-    console.log('payload', payload);
+    console.log('payload', formData);
+
   
 
   };
@@ -58,15 +66,51 @@ function LoginPage() {
         <h2 className="translate-y-7 rotate-90 font-bold">ChroniX</h2>
       </div>
 
-      <div className=' text-center grid grid-rows-3 grid-cols-3'>
+      <div className=' text-center grid grid-rows-4 grid-cols-1'>
         <form onSubmit={handleSubmit}
-          className='row-start-2 row-end-3 col-start-2 flex flex-col  gap-1'>
+          className='row-start-1 row-end-5 col-start-2 flex flex-col self-center  gap-1'>
           <h2 className='text-6xl text-center font-bold mb-5'> <p className='font-normal'>Create New</p> account </h2>
           <Input
             placeholder='User'
             type="text"
             name="username"
             value={formData.username}
+            onChange={handleChange}
+            required
+
+          />
+          <Input
+            placeholder='e-mail'
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+
+          />
+          <Input
+            placeholder='Your name'
+            type="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+
+          />
+          <Input
+            placeholder='Your last-name'
+            type="lastname"
+            name="LastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+
+          />
+          <Input
+            placeholder='Your phone number'
+            type="number"
+            name="phoneNumber"
+            value={formData.phoneNumber}
             onChange={handleChange}
             required
 
@@ -109,7 +153,7 @@ function LoginPage() {
           <Button> <i className='bx bxl-google'></i> Sign In With Google </Button>
         </form>
 
-        <div className='row-start-3 row-end-4 col-start-2 self-end pb-10 flex flex-col gap-5' >
+        <div className='row-start-5 row-end-6 col-start-2 self-end pb-10 flex flex-col gap-5' >
           <p className='text-xl font-normal'> Already have an account? <Link to='/login' className='text-orange-400 underline'>Sign in here</Link> </p>
           <p className='text-1xl font-noraml  text-gray-800 hover:cursor-pointer'> Terms of Use | Privacy Policy</p>
         </div>

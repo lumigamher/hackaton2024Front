@@ -3,7 +3,19 @@ import { useAuth } from '../hooks/useAuth';
 import Input from '../components/ui/input';
 import Button from '../components/ui/Button'
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+  }
+});
 
 function LoginPage() {
   const { login } = useAuth()
@@ -25,7 +37,10 @@ function LoginPage() {
       'password': formData.password
     }
     login(payload)
-
+    Toast.fire({
+      icon: 'success',
+      title: 'Inicio de sesión exitoso'
+  });
   };
 
   const toogleVisibility = () => {
