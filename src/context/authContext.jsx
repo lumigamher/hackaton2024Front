@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
             setisAuthenticated(false);
         }
     }, [])
-    
+
     const login = async (credentials) => {
         const response = await authService.login(credentials)
 
@@ -34,7 +34,13 @@ export const AuthProvider = ({ children }) => {
     }
     const register = async (credentials) => {
         const response = await authService.register(credentials)
-        return response;
+        if (response.status == 200) {
+            Toast.fire({
+                icon: 'success',
+                title: 'User successfully registered'
+            });
+            navigate('/login')
+        }
     }
     const logout = () => {
         setToken(null)
@@ -42,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         setisAuthenticated(false)
     }
     return (
-        <AuthContext.Provider value={{isAuthenticated, token, login, logout, register}}>
+        <AuthContext.Provider value={{ isAuthenticated, token, login, logout, register }}>
             {children}
         </AuthContext.Provider>
     )

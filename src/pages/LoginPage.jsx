@@ -36,7 +36,7 @@ function LoginPage() {
       'username': formData.username,
       'password': formData.password
     }
-    login(payload)
+    await login(payload)
     Toast.fire({
       icon: 'success',
       title: 'Inicio de sesión exitoso'

@@ -59,17 +59,7 @@ function LoginPage() {
       password: formData.password,
       email: formData.email,
     };
-    const response = await register(payload)
-    if (response.status == 200) {
-      Toast.fire({
-        icon: 'success',
-        title: 'User successfully registered'
-      });
-      navigate('/login')
-    }
-
-
-
+    await register(payload)
   };
 
 
@@ -103,33 +93,6 @@ function LoginPage() {
             type="email"
             name="email"
             value={formData.email}
-            onChange={handleChange}
-            required
-
-          />
-          <Input
-            placeholder='Your name'
-            type="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-
-          />
-          <Input
-            placeholder='Your last-name'
-            type="lastname"
-            name="LastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            required
-
-          />
-          <Input
-            placeholder='Your phone number'
-            type="number"
-            name="phoneNumber"
-            value={formData.phoneNumber}
             onChange={handleChange}
             required
 
