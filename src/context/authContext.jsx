@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate()
     const [token, setToken] = useState(null)
-    const [isAuthenticated, setisAuthenticated] = useState(false)
+    const [isAuthenticated, setisAuthenticated] = useState(true)
 
 
     useEffect(() => {
