@@ -30,22 +30,28 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     };
 
     const deleteTask = (e) => {
-        const {id} = e.target
-        setTasks((prevData) => prevData.filter(task => task.name !== id))
-        
+        const { id } = e.target
+        setTasks((prevData) => {
+            const updatedTasks = prevData.filter(task => task.name !== id);
+            setNewProyect((prevData) => ({
+                ...prevData,
+                tareas: updatedTasks,
+            }));
+            setTask("");
+            return updatedTasks;
+        });
+
     }
     const saveTask = () => {
-        if (task.trim()) {
-            setTasks((prevData) => {
-                const updatedTasks = [...prevData, { name: task }];
-                setNewProyect((prevData) => ({
-                    ...prevData,
-                    tareas: updatedTasks,
-                }));
-                setTask("");
-                return updatedTasks;
-            });
-        }
+        setTasks((prevData) => {
+            const updatedTasks = [...prevData, { name: task }];
+            setNewProyect((prevData) => ({
+                ...prevData,
+                tareas: updatedTasks,
+            }));
+            setTask("");
+            return updatedTasks;
+        });
     };
 
     const handleCreataProyect = () => {
