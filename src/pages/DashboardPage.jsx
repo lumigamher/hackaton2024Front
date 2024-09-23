@@ -6,7 +6,7 @@ import NewProyectModal from '../components/ui/NewProyectModal'
 import {useAuth} from '../hooks/useAuth'
 
 function DashboardPage() {
-  const [showNewProyectModal, setShowNewProyectModal] = useState(false)
+  const [showNewProyectModal, setShowNewProyectModal] = useState(true)
   const {logout} = useAuth()
 
   const handleModalView = () => {
