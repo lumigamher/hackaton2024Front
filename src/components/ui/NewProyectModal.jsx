@@ -1,7 +1,30 @@
 import ProyectDisplay from "./ProyectDisplay"
 import UserAvailableModal from "./UserAvailableModal"
 import AssignedTask from "./AssignedTask"
+import useFetchStaff from "../../hooks/useFetchStaff"
+
+
+
+
+import {default as axios} from '../../api/axiosInstace'
+
 function NewProyectModal() {
+
+    // const {staff, loading, error, refetch} = useFetchStaff()
+    // console.log(staff);
+    
+    const onose = async () => {
+        try {
+            const response = await axios.get('usuarios/sin-proyectos')
+            console.log(response.data);
+            
+        } catch (error) {
+            
+        }
+    }
+
+    onose()
+
     return (
         <div className='absolute w-screen h-screen backdrop-blur-sm grid grid-cols-4 grid-rows-6 '>
             <div className='w-full h-full  bg-white shadow-2xl rounded-t-2xl p-10 row-start-2 row-end-7 col-start-2 col-end-4 flex flex-col '>

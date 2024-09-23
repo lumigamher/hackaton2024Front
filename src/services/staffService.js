@@ -1,4 +1,4 @@
-import axios from "axios";
+import { default as axios } from "../api/axiosInstace"
 
 export const staffService = {
     getAllAvailStaff: async () => {
