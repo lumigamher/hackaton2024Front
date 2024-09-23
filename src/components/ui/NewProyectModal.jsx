@@ -5,10 +5,12 @@ import useFetchStaff from "../../hooks/useFetchStaff"
 
 
 
-
 import { default as axios } from '../../api/axiosInstace'
 
 function NewProyectModal({handleClickModal, handleSubmit}) {
+    const {staff, loading, error, refetch} = useFetchStaff()
+    console.log(staff);
+    
 
     return (
         <div className='absolute w-screen  h-screen backdrop-blur-sm grid grid-cols-4 grid-rows-6 '>
@@ -44,9 +46,13 @@ function NewProyectModal({handleClickModal, handleSubmit}) {
                     <div className='col-start-3 col-end-4 bg-white border-2 border-gray-100 rounded-xl grid grid-rows-[15%_70%_15%]'>
                         <p className="w-full text-center p-5 text-xl text-orange-600"> Staff Available </p>
                         <div className="overflow-y-auto flex flex-col gap-5 p-5">
-                            <UserAvailableModal
-                                name={'Felipe Mendoza'}
-                            />
+                            {
+                                staff.map(user => (
+                                    <UserAvailableModal
+                                    name={user.nombre + " " + user.apellido}
+                                    />
+                                ))
+                            }
                         </div>
                         <div className="flex justify-end p-5">
                             <button className="border-2 border-gray-200 py-1 px-2 hover:bg-gray-200 hover:text-black text-gray-400 rounded-xl" onClick={handleSubmit}>save</button>

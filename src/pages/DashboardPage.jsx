@@ -3,10 +3,11 @@ import Input from '../components/ui/Input'
 import AddNewProyect from '../components/ui/AddNewProyect'
 import { useState } from 'react'
 import NewProyectModal from '../components/ui/NewProyectModal'
-
+import {useAuth} from '../hooks/useAuth'
 
 function DashboardPage() {
   const [showNewProyectModal, setShowNewProyectModal] = useState(false)
+  const {logout} = useAuth()
 
   const handleModalView = () => {
     setShowNewProyectModal(prev => !prev)
@@ -22,7 +23,7 @@ function DashboardPage() {
       <div className="flex h-full w-full flex-col gap-3 bg-slate-50 p-8">
         <div className="flex w-full justify-end">
           <p className="text-sm">
-            <button>Log out</button>
+            <button onClick={logout} className='hover:text-red-600 hover:scale-125 hover:font-semibold duration-300'>Log out</button>
           </p>
         </div>
         <div>
