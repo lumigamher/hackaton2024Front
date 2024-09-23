@@ -1,9 +1,12 @@
 import ProyectDisplay from '../components/ui/ProyectDisplay'
 import Input from '../components/ui/Input'
 import AddNewProyect from '../components/ui/AddNewProyect'
+import { useState } from 'react'
+import NewProyectModal from '../components/ui/NewProyectModal'
 
 
 function DashboardPage() {
+  const [showNewProyectModal, setShowNewProyectModal] = useState(true)
   return (
     <div className="flex h-screen w-screen justify-between bg-gradient-to-b from-gray-50 to-gray-300">
       <div className="w-6 bg-white">
@@ -33,17 +36,16 @@ function DashboardPage() {
                 <div className='flex min-w-max gap-5'>
                 <ProyectDisplay proyectName='Athlex' />
                 <ProyectDisplay proyectName='Athlex' />
-                <ProyectDisplay proyectName='Athlex' />
-                <ProyectDisplay proyectName='Athlex' />
-                <ProyectDisplay proyectName='Athlex' />
-                <ProyectDisplay proyectName='Athlex' />
-                <ProyectDisplay proyectName='Athlex' />
+
                 </div>
             </div>
           </div>
         </div>
       </div>
       <div className="w-6 bg-white"></div>
+      {
+        showNewProyectModal && (<NewProyectModal/>)
+      }
     </div>
 
   )

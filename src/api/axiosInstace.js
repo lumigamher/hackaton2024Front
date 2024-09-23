@@ -1,9 +1,12 @@
 import axios from "axios";
 
-const testURL = 'http://54.235.40.226:8080'
+const testURL = 'http://54.235.40.226'
 
 const instance = axios.create({
     baseURL: testURL,
+    headers: {
+        'Content-Type': 'application/json'
+    },
 })
 
 
