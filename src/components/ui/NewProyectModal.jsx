@@ -8,28 +8,13 @@ import useFetchStaff from "../../hooks/useFetchStaff"
 
 import { default as axios } from '../../api/axiosInstace'
 
-function NewProyectModal() {
-
-    // const {staff, loading, error, refetch} = useFetchStaff()
-    // console.log(staff);
-
-    // const onose = async () => {
-    //     try {
-    //         const response = await axios.get('usuarios/sin-proyectos')
-    //         console.log(response.data);
-
-    //     } catch (error) {
-
-    //     }
-    // }
-
-    // onose()
+function NewProyectModal({handleClickModal}) {
 
     return (
-        <div className='absolute w-screen h-screen backdrop-blur-sm grid grid-cols-4 grid-rows-6 '>
+        <div className='absolute w-screen  h-screen backdrop-blur-sm grid grid-cols-4 grid-rows-6 '>
             <div className='w-full h-full  bg-white shadow-2xl rounded-t-2xl p-10 row-start-2 row-end-7 col-start-2 col-end-4 flex flex-col '>
                 <div className='flex justify-end '>
-                    <i className='text-5xl text-gray-400 hover:scale-105 cursor-pointer duration-150 bx bxs-x-square'></i>
+                    <i className='text-5xl text-gray-400 hover:scale-105 cursor-pointer duration-150 bx bxs-x-square' onClick={handleClickModal}></i>
                 </div>
                 <div className='w-full'>
                     <h2 className='text-black text-4xl font-bold'>New Proyect</h2>
