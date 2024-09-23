@@ -6,8 +6,10 @@ export default function UserAvailableModal({ name, url, handleClick, id, selecte
     const [isSelected, setIsSelected] = useState(selected)
 
     const handleSelection = () => {
-        setIsSelected(prev => !prev)
-        handleClick()
+        const newSelection = !isSelected
+        setIsSelected(newSelection)
+        // console.log(newSelection);
+        handleClick(id, newSelection)
     }
     
     return (
