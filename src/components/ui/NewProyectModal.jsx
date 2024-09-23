@@ -54,6 +54,10 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         });
     };
 
+    const toogleAddUser = (e) => {
+        
+        
+    }
     const handleCreataProyect = () => {
         console.log(newProyect);
 
@@ -119,6 +123,9 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                                 <UserAvailableModal
                                     name={user.nombre + " " + user.apellido}
                                     key={user.id}
+                                    handleClick={toogleAddUser}
+                                    id={user.id}
+                                    
                                 />
                             ))}
                         </div>
