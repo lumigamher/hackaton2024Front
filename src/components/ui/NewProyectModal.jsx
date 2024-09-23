@@ -6,24 +6,24 @@ import useFetchStaff from "../../hooks/useFetchStaff"
 
 
 
-import {default as axios} from '../../api/axiosInstace'
+import { default as axios } from '../../api/axiosInstace'
 
 function NewProyectModal() {
 
     // const {staff, loading, error, refetch} = useFetchStaff()
     // console.log(staff);
-    
-    const onose = async () => {
-        try {
-            const response = await axios.get('usuarios/sin-proyectos')
-            console.log(response.data);
-            
-        } catch (error) {
-            
-        }
-    }
 
-    onose()
+    // const onose = async () => {
+    //     try {
+    //         const response = await axios.get('usuarios/sin-proyectos')
+    //         console.log(response.data);
+
+    //     } catch (error) {
+
+    //     }
+    // }
+
+    // onose()
 
     return (
         <div className='absolute w-screen h-screen backdrop-blur-sm grid grid-cols-4 grid-rows-6 '>
@@ -50,9 +50,9 @@ function NewProyectModal() {
                         <div className="bg-white w-full h-full col-start-1 col-end-3 row-start-2 row-end-3 p-5 rounded-xl overflow-y-auto flex flex-col gap-5">
                             <input type="text" className="w-full border-2 border-gray-200 rounded-xl unded-xl py-3 px-2 focus:outline-none" placeholder="Add task" />
                             <div className="bg-white border-2 border-gray-200 w-full h-full rounded-2xl overflow-y-auto flex flex-col gap-5 p-5">
-                            <AssignedTask
-                            taskName={'create login'}
-                            />
+                                <AssignedTask
+                                    taskName={'create login'}
+                                />
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ function NewProyectModal() {
                         <p className="w-full text-center p-5 text-xl text-orange-600"> Staff Available </p>
                         <div className="overflow-y-auto flex flex-col gap-5 p-5">
                             <UserAvailableModal
-                            name={'Felipe Mendoza'}
+                                name={'Felipe Mendoza'}
                             />
                         </div>
                         <div className="flex justify-end p-5">

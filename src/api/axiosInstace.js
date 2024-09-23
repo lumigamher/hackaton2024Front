@@ -1,21 +1,22 @@
 import axios from "axios";
 
 const testURL = 'http://54.235.40.226'
+const local = 'http://localhost:8080'
 
 const instance = axios.create({
-    baseURL: testURL,
-    headers: {
-        'Content-Type': 'application/json'
-    },
+    baseURL: testURL
 })
 
 
 instance.interceptors.request.use((config) => {
     const token = localStorage.getItem('token')
-    if(token) {
+    console.log(token);
+
+    if (token) {
         config.headers.Authorization = `Bearer ${token}`
     }
-    return config
+    console.log('Request made with ', config);
+    return config;
 }, (error) => {
     return Promise.reject(error)
 });

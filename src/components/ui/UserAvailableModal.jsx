@@ -1,6 +1,24 @@
-import React from 'react'
 
-export default function UserAvailableModal({name}) {
+import React, { useEffect } from 'react'
+import axios from "../../api/axiosInstace"
+
+export default function UserAvailableModal({ name }) {
+    const [usersAvailable, setUsersAvailable] = React.useState([])
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get('/usuarios/sin-proyectos');
+                console.log(response.data);
+
+                setUsersAvailable(response.data);
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        };
+        fetchUsers();
+    }, []);
+
     return (
         <div className="flex items-center  justify-around">
             <img
