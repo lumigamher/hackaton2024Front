@@ -8,7 +8,7 @@ import useFetchStaff from "../../hooks/useFetchStaff"
 
 import { default as axios } from '../../api/axiosInstace'
 
-function NewProyectModal({handleClickModal}) {
+function NewProyectModal({handleClickModal, handleSubmit}) {
 
     return (
         <div className='absolute w-screen  h-screen backdrop-blur-sm grid grid-cols-4 grid-rows-6 '>
@@ -49,7 +49,7 @@ function NewProyectModal({handleClickModal}) {
                             />
                         </div>
                         <div className="flex justify-end p-5">
-                            <button className="border-2 border-gray-200 py-1 px-2 hover:bg-gray-200 hover:text-black text-gray-400 rounded-xl">save</button>
+                            <button className="border-2 border-gray-200 py-1 px-2 hover:bg-gray-200 hover:text-black text-gray-400 rounded-xl" onClick={handleSubmit}>save</button>
                         </div>
                     </div>
                 </div>

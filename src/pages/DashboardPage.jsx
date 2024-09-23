@@ -11,6 +11,9 @@ function DashboardPage() {
   const handleModalView = () => {
     setShowNewProyectModal(prev => !prev)
   }
+  const handleCreateNewProyect = () => {
+    setShowNewProyectModal(prev => !prev)
+  }
   return (
     <div className="flex h-screen w-screen justify-between bg-gradient-to-b from-gray-50 to-gray-300">
       <div className="w-6 bg-white">
@@ -50,7 +53,7 @@ function DashboardPage() {
       </div>
       <div className="w-6 bg-white"></div>
       {
-        showNewProyectModal && (<NewProyectModal handleClickModal={handleModalView}/>)
+        showNewProyectModal && (<NewProyectModal handleClickModal={handleModalView} handleSubmit={handleCreateNewProyect}/>)
       }
     </div>
 
