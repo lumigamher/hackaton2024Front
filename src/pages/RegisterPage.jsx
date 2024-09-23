@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import Input from '../components/ui/input';
+import Input from '../components/ui/Input';
 import Button from '../components/ui/Button'
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
