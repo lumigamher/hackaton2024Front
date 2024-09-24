@@ -6,7 +6,7 @@ import NewProyectModal from '../components/ui/NewProyectModal'
 import { useAuth } from '../hooks/useAuth'
 
 function DashboardPage() {
-  const [showNewProyectModal, setShowNewProyectModal] = useState(true)
+  const [showNewProyectModal, setShowNewProyectModal] = useState(false)
   const { logout } = useAuth()
 
   const handleModalView = () => {
@@ -48,7 +48,7 @@ function DashboardPage() {
           <p className="text-orange-600">Your projects</p>
           <div className="flex flex-col sm:flex-row gap-5">
             <AddNewProyect handleClick={handleModalView} />
-            <div className="w-full overflow-x-auto flex bg-slate-300">
+            <div className="w-full overflow-x-auto flex ">
               <div className="flex min-w-max gap-5">
                 <ProyectDisplay proyectName="Athlex" />
                 <ProyectDisplay proyectName="Athlex" />
