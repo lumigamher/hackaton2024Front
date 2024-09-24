@@ -11,11 +11,19 @@ export const  proyectService = {
     getProyectById: async (id) => {
         try {
             const response = await axios.get(`/proyectos/${id}`)
-            return response
+            return response.data
         } catch (error) {
             console.warn("Error getting proyect with id: " + id + " " + error);
         }
     },
+    getAllProjects: async (id) => {
+        try {
+            const response = await axios.get(`/proyectos/todos`)
+            return response
+        } catch (error) {
+            console.warn("Error getting proyects: " + error);
+        }
+    }
 
 
 }
