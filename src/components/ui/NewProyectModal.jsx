@@ -54,6 +54,24 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         });
     };
 
+    const toggleAddUser = (id, state) => {
+        if (state) {
+            console.log('se añadio');
+            setUsers((prevData) => {
+                const updatedUsers = [...prevData, { id: id }];
+                setNewProyect((prevData) => ({ ...prevData, usuarios: updatedUsers }));
+                return updatedUsers; 
+            });
+        } else {
+            console.log('se elimino');
+            setUsers((prevData) => {
+                const updatedUsers = prevData.filter(user => user.id !== id); 
+                setNewProyect((prevData) => ({ ...prevData, usuarios: updatedUsers }));
+                return updatedUsers;
+            });
+        }
+    };
+    
     const handleCreataProyect = () => {
         console.log(newProyect);
 
@@ -119,6 +137,9 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                                 <UserAvailableModal
                                     name={user.nombre + " " + user.apellido}
                                     key={user.id}
+                                    handleClick={toggleAddUser}
+                                    id={user.id}
+                                    
                                 />
                             ))}
                         </div>
