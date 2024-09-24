@@ -2,7 +2,7 @@ import React from 'react'
 
 function StaffCard({name, workedTime}) {
     return (
-        <div className=" sm:w-full sm:h-auto lg: w-[400px] lg: h-[200px] border-2 border-gray-100 rounded-xl grid grid-rows-[70%_30%] p-3">
+        <div className=" sm:w-full sm:h-auto lg:w-[400px] lg:h-[200px] border-2 border-gray-100 rounded-xl grid grid-rows-[70%_30%] p-3">
             <div className="w-full h-full flex justify-between items-center pb-5 px-3">
                 <img
                     src=""

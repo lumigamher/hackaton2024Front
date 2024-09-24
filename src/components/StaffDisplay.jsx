@@ -3,22 +3,24 @@ import StaffCard from "./ui/StaffCard"
 
 function StaffDisplay({ projectIn = false }) {
 
-  const [project, setProject] = useState([])
+  const [project, setProject] = useState(projectIn)
+  const [users, setUsers] = useState(projectIn.usuarios)
 
   useEffect(() => {
-    console.log(project);
+    console.log(users);
 
-  }, [project])
+  }, [users])
 
 
   return (
 
-    <div className='w-full h-auto bg-black'>
-      {project ? (
-        project.map(user => (
+    <div className='w-full h-auto flex gap-15 flex-wrap'>
+      {users.length > 0 ? (
+        users.map(user => (
           <StaffCard
-            key={user.id}
-            name={user.name}
+          key={user.id}
+          name={user.nombre}
+          workedTime={user.tiempoTrabajado}
           />
         ))
       ) : null}

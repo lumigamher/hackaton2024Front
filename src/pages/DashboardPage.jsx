@@ -25,9 +25,9 @@ function DashboardPage() {
   }, [])
 
   useEffect(() => {
-    // console.log(project);
+    console.log(projects);
 
-  }, [project])
+  }, [projects])
 
   const handleModalView = () => {
     setShowNewProyectModal(prev => !prev)
@@ -37,8 +37,8 @@ function DashboardPage() {
   }
   const handleShowDetails = async (e) => {
     const { id } = e.target
-    setProject( await proyectService.getProyectById(id))
-    
+    setProject(await proyectService.getProyectById(id))
+
   }
 
 
@@ -78,15 +78,23 @@ function DashboardPage() {
             <div className="w-full overflow-x-auto flex ">
               <div className="flex min-w-max gap-5">
                 {
-                  projects.map((project) => (
-                    <ProyectDisplay
-                      key={project.id}
-                      projectName={project.nombre}
-                      label='Hours worked'
-                      showDetails={handleShowDetails}
-                      id={project.id}
-                    />
-                  ))
+                  projects.map((project) => {
+                    const totalHours = project.usuarios.reduce((acc, user) => {
+                      return acc + user.tiempoTrabajado
+                    }, 0)
+                    console.log(totalHours);
+                    
+                    return (
+                      <ProyectDisplay
+                        key={project.id}
+                        projectName={project.nombre}
+                        label='Hours worked'
+                        showDetails={handleShowDetails}
+                        id={project.id}
+                        time={totalHours}
+                      />
+                    )
+                  })
                 }
 
 
@@ -95,8 +103,8 @@ function DashboardPage() {
           </div>
         </div>
         <div>
-          <p className="text-orange-600">Your staff</p>
-          {project? (<StaffDisplay projectIn={project} />) : null}
+          <p className="text-orange-600 ">Your staff</p>
+          {project ? (<StaffDisplay projectIn={project} />) : null}
         </div>
       </div>
 
