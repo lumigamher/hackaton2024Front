@@ -69,16 +69,18 @@ function LoginPage() {
 
   return (
 
-    <div className="flex h-screen w-screen justify-between bg-gray-100">
+    <div className="flex flex-col lg:flex-row h-screen w-screen justify-between bg-gray-100">
 
-      <div className="w-6 bg-white">
+      <div className="w-6 bg-white hidden lg:block">
         <h2 className="translate-y-7 rotate-90 font-bold">ChroniX</h2>
       </div>
 
-      <div className=' text-center grid grid-rows-4 grid-cols-1'>
+      <div className='text-center grid grid-rows-4 grid-cols-1 flex-1'>
         <form onSubmit={handleSubmit}
-          className='row-start-1 row-end-5 col-start-2 flex flex-col self-center  gap-1'>
-          <h2 className='text-6xl text-center font-bold mb-5'> <p className='font-normal'>Create New</p> account </h2>
+          className='row-start-1 row-end-5 col-start-1 flex flex-col self-center gap-5 px-5 md:px-20 lg:px-40'>
+          <h2 className='text-4xl md:text-5xl lg:text-6xl text-center font-bold mb-5'>
+            <p className='font-normal'>Create New</p> Account
+          </h2>
           <Input
             placeholder='User'
             type="text"
@@ -86,16 +88,14 @@ function LoginPage() {
             value={formData.username}
             onChange={handleChange}
             required
-
           />
           <Input
-            placeholder='e-mail'
+            placeholder='E-mail'
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-
           />
           <Input
             type={isVisible ? 'text' : 'password'}
@@ -105,15 +105,11 @@ function LoginPage() {
             onChange={handleChange}
             required
           />
-
-          <div className='scale-105 '>
-
+          <div className='relative scale-105'>
             <i
-              className={`absolute translate-x-5 translate-y-7 py-0.5 hover:cursor-pointer bx-low-vision  bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
+              className={`absolute translate-x-5 translate-y-7 py-0.5 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
               onClick={toogleVisibility}
-            >
-            </i>
-
+            />
             <Input
               type={isVisible ? 'text' : 'password'}
               name="repeatPassword"
@@ -125,25 +121,27 @@ function LoginPage() {
             <i
               className='absolute -translate-x-8 translate-y-7 pt-0.5 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt'
               onClick={handleSubmit}
-            >
-
-            </i>
-            {
-              isMatching ? '' : <p className='mt-5 text-sm text-red-500'> Password must match! </p>
-            }
+            />
+            {!isMatching && <p className='mt-5 text-sm text-red-500'> Passwords must match! </p>}
           </div>
-          <Button> <i className='bx bxl-google'></i> Sign In With Google </Button>
+          <Button>
+            <i className='bx bxl-google'></i> Sign In With Google
+          </Button>
         </form>
 
-        <div className='row-start-5 row-end-6 col-start-2 self-end pb-10 flex flex-col gap-5' >
-          <p className='text-xl font-normal'> Already have an account? <Link to='/login' className='text-orange-400 underline'>Sign in here</Link> </p>
-          <p className='text-1xl font-noraml  text-gray-800 hover:cursor-pointer'> Terms of Use | Privacy Policy</p>
+        <div className='row-start-5 row-end-6 col-start-1 self-end pb-10 flex flex-col gap-5'>
+          <p className='text-xl font-normal'> Already have an account?
+            <Link to='/login' className='text-orange-400 underline'> Sign in here </Link>
+          </p>
+          <p className='text-sm md:text-lg text-gray-800 hover:cursor-pointer'>
+            Terms of Use | Privacy Policy
+          </p>
         </div>
       </div>
 
-      <div className="w-6 bg-white" />
-
+      <div className="w-6 bg-white hidden lg:block" />
     </div>
+
   );
 }
 

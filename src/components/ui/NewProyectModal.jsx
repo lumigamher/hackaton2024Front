@@ -4,6 +4,7 @@ import AssignedTask from "./AssignedTask";
 import useFetchStaff from "../../hooks/useFetchStaff";
 import { default as axios } from "../../api/axiosInstace";
 import { useState } from "react";
+import { proyectService } from "../../services/proyectService";
 
 function NewProyectModal({ handleClickModal, handleSubmit }) {
     const { staff, loading, error, refetch } = useFetchStaff();
@@ -72,8 +73,12 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         }
     };
     
-    const handleCreataProyect = () => {
+    const handleCreataProyect = async () => {
         console.log(newProyect);
+        const response = await proyectService.createProyect(newProyect)
+        if (response.status == 200) {
+            console.log("guardado");
+        }
 
     };
 

@@ -13,7 +13,7 @@ function LandingPage() {
 
       <div className="w-full grid grid-cols-3">
         <div className="col-start-2 col-end-3 flex flex-col justify-center items-center gap-2">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-normal transition-transform duration-500 ease-in-out transform ">
+          <h2 className="text-4xl sm:text-5xl text-center lg:text-6xl font-normal transition-transform duration-500 ease-in-out transform ">
             Welcome to
           </h2>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold transition-transform duration-500 ease-in-out transform">
