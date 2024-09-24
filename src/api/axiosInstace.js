@@ -5,7 +5,10 @@ const testURL2 = 'https://54.147.236.208'
 const local = 'http://localhost:8080'
 
 const instance = axios.create({
-    baseURL: testURL
+    baseURL: testURL2,
+    httpsAgent: new https.Agent({
+        rejectUnauthorized: false,
+    })
 })
 
 
