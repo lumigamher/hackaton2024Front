@@ -1,13 +1,29 @@
 import ProyectDisplay from '../components/ui/ProyectDisplay'
 import Input from '../components/ui/Input'
 import AddNewProyect from '../components/ui/AddNewProyect'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import NewProyectModal from '../components/ui/NewProyectModal'
 import { useAuth } from '../hooks/useAuth'
-
+import { proyectService } from '../services/proyectService'
 function DashboardPage() {
+
   const [showNewProyectModal, setShowNewProyectModal] = useState(false)
+  const [projects, setProjects] = useState([])
   const { logout } = useAuth()
+
+
+  //   useEffect(() => {
+  //       const fetchProjects = async () => {
+  //         const data = await proyectService.getProyectById(16)
+  //         setProjects(data.data)
+  //       }
+  //       fetchProjects()
+  //   }, [])
+
+  //   useEffect(() => {
+  //     console.log(projects);
+
+  // }, [projects])
 
   const handleModalView = () => {
     setShowNewProyectModal(prev => !prev)
