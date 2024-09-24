@@ -84,7 +84,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
 
     return (
         <div className="absolute w-screen h-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
-            <div className="w-full md:h-full :h-auto bg-white lg:shadow-2xl rounded-t-2xl p-5 lg:p-10 lg:row-start-2 lg:row-end-7 lg:col-start-2 lg:col-end-4 flex flex-col">
+            <div className="w-full lg:h-full h-auto bg-white lg:shadow-2xl rounded-t-2xl p-5 lg:p-10 lg:row-start-2 lg:row-end-7 lg:col-start-2 lg:col-end-4 flex flex-col">
 
                 {/* Ajuste de tamaño de ícono para mobile */}
                 <div className="flex justify-end">
