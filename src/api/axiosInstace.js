@@ -1,10 +1,14 @@
 import axios from "axios";
+import https from 'https'
 
-const testURL = 'http://54.235.40.226'
+const testURL = 'https://athlex.pro'
+const testURL2 = 'https://athlex.pro'
 const local = 'http://localhost:8080'
 
+
+
 const instance = axios.create({
-    baseURL: testURL
+    baseURL: testURL2
 })
 
 
