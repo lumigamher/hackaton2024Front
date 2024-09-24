@@ -8,7 +8,7 @@ interface Props {
 
 function ProyectDisplay({ url, time, proyectName, icon = 'bxs-right-top-arrow-circle', label }: Props) {
     return (
-        <div className={`flex h-[175px] w-[380px] bg-gray-200 justify-between rounded-3xl p-5 bg-[url('${url}')] bg-cover bg-center`}>
+        <div className={`flex h-[175px] lg:w-[380px]  bg-gray-200 justify-between rounded-3xl p-5 bg-[url('${url}')] bg-cover bg-center`}>
             <div className="flex h-full w-fit flex-col items-center justify-between text-center">
                 <div>
                     <p className="text-sm text-gray-200">{label}</p>
