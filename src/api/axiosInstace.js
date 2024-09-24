@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const testURL = 'https://54.147.236.208'
-const testURL2 = 'https://54.147.236.208'
+const testURL = 'https://54.147.236.208/'
+const testURL2 = 'https://54.147.236.208/'
 const local = 'http://localhost:8080'
 
 const instance = axios.create({
