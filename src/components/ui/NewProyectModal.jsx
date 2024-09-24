@@ -61,18 +61,18 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
             setUsers((prevData) => {
                 const updatedUsers = [...prevData, { id: id }];
                 setNewProyect((prevData) => ({ ...prevData, usuarios: updatedUsers }));
-                return updatedUsers; 
+                return updatedUsers;
             });
         } else {
             console.log('se elimino');
             setUsers((prevData) => {
-                const updatedUsers = prevData.filter(user => user.id !== id); 
+                const updatedUsers = prevData.filter(user => user.id !== id);
                 setNewProyect((prevData) => ({ ...prevData, usuarios: updatedUsers }));
                 return updatedUsers;
             });
         }
     };
-    
+
     const handleCreataProyect = async () => {
         console.log(newProyect);
         const response = await proyectService.createProyect(newProyect)
@@ -83,26 +83,36 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     };
 
     return (
-        <div className="absolute w-screen h-screen backdrop-blur-sm grid grid-cols-4 grid-rows-6">
-            <div className="w-full h-full bg-white shadow-2xl rounded-t-2xl p-10 row-start-2 row-end-7 col-start-2 col-end-4 flex flex-col">
+        <div className="absolute w-screen h-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
+            <div className="w-full md:h-full :h-auto bg-white lg:shadow-2xl rounded-t-2xl p-5 lg:p-10 lg:row-start-2 lg:row-end-7 lg:col-start-2 lg:col-end-4 flex flex-col">
+
+                {/* Ajuste de tamaño de ícono para mobile */}
                 <div className="flex justify-end">
                     <i
-                        className="text-5xl text-gray-400 hover:scale-105 cursor-pointer duration-150 bx bxs-x-square"
+                        className="text-3xl lg:text-5xl text-gray-400 hover:scale-105 cursor-pointer duration-150 bx bxs-x-square"
                         onClick={handleClickModal}
                     ></i>
                 </div>
+
+                {/* Ajuste del input para mobile */}
                 <div className="w-full">
                     <input
                         name="nombre"
                         type="text"
-                        className="bg-transparent text-4xl focus:outline-none"
+                        className="bg-transparent text-2xl lg:text-4xl focus:outline-none"
                         placeholder="New Proyect"
                         onChange={handleChange}
                     />
                 </div>
-                <div className="grid grid-cols-3 grid-rows-1 w-full h-full mt-5 gap-5 overflow-y-auto">
-                    <div className="col-start-1 col-end-3 grid grid-cols-2 grid-rows-[175px_auto] row-start-1 row-end-2 gap-5">
-                        <div className="flex gap-5 col-start-1 col-end-3">
+
+                {/* Cambiar layout de la grid a columnas en mobile */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-1 w-full h-full mt-5 gap-5 overflow-y-auto">
+
+                    {/* Hacer que este bloque sea vertical en mobile */}
+                    <div className="col-start-1 col-end-4 lg:col-start-1 lg:col-end-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-[175px_auto] lg:gap-5">
+
+                        {/* Flex direction para mobile */}
+                        <div className="flex flex-col lg:flex-row gap-5 col-start-1 col-end-4">
                             <ProyectDisplay label="Select Photo" icon="bx bx-upload" />
                             <div>
                                 <textarea
@@ -114,8 +124,10 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                                 ></textarea>
                             </div>
                         </div>
-                        <div className="bg-white w-full h-full col-start-1 col-end-3 row-start-2 row-end-3 rounded-xl overflow-y-auto flex flex-col gap-5">
-                            <div className="flex gap-5">
+
+                        {/* Sección de tareas ajustada para mobile */}
+                        <div className="bg-white w-full h-full col-start-1 col-end-4 row-start-2 row-end-3 rounded-xl overflow-y-auto flex flex-col gap-5">
+                            <div className="flex gap-5 flex-col lg:flex-row">
                                 <input
                                     type="text"
                                     name="task"
@@ -133,18 +145,19 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                             </div>
                         </div>
                     </div>
-                    <div className="col-start-3 col-end-4 bg-white border-2 border-gray-100 rounded-xl grid grid-rows-[15%_70%_15%]">
-                        <p className="w-full text-center p-5 text-xl text-orange-600">
+
+                    {/* Ajustar esta sección para ser vertical en mobile */}
+                    <div className="col-start-1 col-end-4 lg:col-start-3 lg:col-end-4 bg-white border-2 border-gray-100 rounded-xl grid grid-rows-[auto_auto_auto]">
+                        <p className="w-full text-center  p-5 text-lg lg:text-xl text-orange-600">
                             Staff Available
                         </p>
-                        <div className="overflow-y-auto flex flex-col gap-5 p-5">
+                        <div className="overflow-y-auto  flex flex-col gap-5 p-5">
                             {staff.map((user) => (
                                 <UserAvailableModal
                                     name={user.nombre + " " + user.apellido}
                                     key={user.id}
                                     handleClick={toggleAddUser}
                                     id={user.id}
-                                    
                                 />
                             ))}
                         </div>
@@ -160,6 +173,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                 </div>
             </div>
         </div>
+
     );
 }
 
