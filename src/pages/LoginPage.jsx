@@ -69,13 +69,13 @@ function LoginPage() {
         <h2 className="translate-y-7 rotate-90 font-bold">ChroniX</h2>
       </div>
 
-      <div className='text-center grid grid-rows-3 grid-cols-1 md:grid-cols-3'>
+      <div className='items-center content-center text-center grid grid-rows-3 grid-cols-1 md:grid-cols-3'>
         <form onSubmit={handleSubmit} onKeyDown={(e => {
           if (e.key === 'Enter') {
             handleSubmit(e);
           }
         })}
-          className='row-start-2 row-end-3 col-start-1 md:col-start-2 flex flex-col gap-1 p-5 md:p-0'>
+          className='items-center content-center row-start-2 row-end-3 col-start-1 md:col-start-2 flex flex-col gap-5 md:p-0'>
           <h2 className='text-4xl md:text-6xl text-center font-bold mb-5'>Login</h2>
           <Input
             placeholder='User'
@@ -85,9 +85,9 @@ function LoginPage() {
             onChange={handleChange}
             required
           />
-          <div className="relative">
+          <div className="relative flex justify-center items-center">
             <i
-              className={`absolute left-5 top-7 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
+              className={`absolute left-5 text-xl hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
               onClick={toggleVisibility}
             ></i>
             <Input
@@ -99,25 +99,25 @@ function LoginPage() {
               required
             />
             <i
-              className='absolute right-5 top-7 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt'
+              className='absolute right-5 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt text-3xl'
               onClick={handleSubmit}
             ></i>
           </div>
-          <div className='row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end pb-10 flex flex-col gap-5'>
+          <div className='relative items-center justify-center row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end flex flex-col gap-5'>
             <Button type="button" onClick={handleGoogleLogin}>
-              <i className='bx bxl-google'></i> Sign In With Google
+              <i className='bx bxl-google'></i> Google
             </Button>
             <Button type="button" onClick={handleFacebookLogin}>
-              <i className='bx bxl-facebook'></i> Sign In With Facebook
+              <i className='bx bxl-facebook'></i> Facebook
             </Button>
-            <p className='text-sm md:text-xl font-normal'>Don't have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
+            <p className='text-sm md:text-xl font-normal mt-20'>Don't have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
             <p className='text-xs md:text-1xl font-normal text-gray-800 hover:cursor-pointer'>Terms of Use | Privacy Policy</p>
           </div>
         </form>
 
 
       </div>
-
+        
       <div className="w-6 bg-white hidden md:block" />
     </div>
   );
