@@ -33,7 +33,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     const deleteTask = (e) => {
         const { id } = e.target
         setTasks((prevData) => {
-            const updatedTasks = prevData.filter(task => task.name !== id);
+            const updatedTasks = prevData.filter(task => task.nombre !== id);
             setNewProyect((prevData) => ({
                 ...prevData,
                 tareas: updatedTasks,
@@ -45,7 +45,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     }
     const saveTask = () => {
         setTasks((prevData) => {
-            const updatedTasks = [...prevData, { name: task }];
+            const updatedTasks = [...prevData, { nombre: task, estadoTarea: 1 }];
             setNewProyect((prevData) => ({
                 ...prevData,
                 tareas: updatedTasks,
@@ -76,7 +76,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     const handleCreataProyect = async () => {
         console.log(newProyect);
         const response = await proyectService.createProyect(newProyect)
-        if (response.status == 200) {
+        if (await response.status == 201) {
             console.log("guardado");
         }
 
@@ -140,13 +140,13 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                             </div>
                             <div className="bg-white border-2 border-gray-200 w-full h-full rounded-2xl overflow-y-auto flex flex-col gap-5 p-5">
                                 {tasks.map((task, index) => (
-                                    <AssignedTask taskName={task.name} key={index} deleteTask={deleteTask} />
+                                    <AssignedTask taskName={task.nombre} key={index} deleteTask={deleteTask} />
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    {/* Ajustar esta sección para ser vertical en mobile */}
+  
                     <div className="col-start-1 col-end-4 lg:col-start-3 lg:col-end-4 bg-white border-2 border-gray-100 rounded-xl grid grid-rows-[auto_auto_auto]">
                         <p className="w-full text-center  p-5 text-lg lg:text-xl text-orange-600">
                             Staff Available
