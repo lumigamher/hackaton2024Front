@@ -54,6 +54,10 @@ function LoginPage() {
     setIsVisible(prev => !prev);
   };
 
+  const handleGoogleLogin = () => {
+    console.log("Iniciando sesión con Google");
+  };
+
   const handleFacebookLogin = () => {
     window.location.href = "https://main.dn8l53vpaw68b.amplifyapp.com/oauth2/authorization/facebook";
   };
@@ -63,7 +67,7 @@ function LoginPage() {
       <div className="w-6 bg-white hidden md:block">
         <h2 className="translate-y-7 rotate-90 font-bold">ChroniX</h2>
       </div>
-
+      
       <div className='text-center grid grid-rows-3 grid-cols-1 md:grid-cols-3'>
         <form onSubmit={handleSubmit}
           className='row-start-2 row-end-3 col-start-1 md:col-start-2 flex flex-col gap-1 p-5 md:p-0'>
@@ -94,18 +98,20 @@ function LoginPage() {
               onClick={handleSubmit}
             ></i>
           </div>
-          <Button onClick={handleFacebookLogin} className="mt-4">
+        </form>
+        
+        <div className='row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end pb-10 flex flex-col gap-5'>
+          <Button type="button" onClick={handleGoogleLogin}>
+            <i className='bx bxl-google'></i> Sign In With Google
+          </Button>
+          <Button type="button" onClick={handleFacebookLogin}>
             <i className='bx bxl-facebook'></i> Sign In With Facebook
           </Button>
-          <Button> <i className='bx bxl-google'></i> Sign In With Google </Button>
-        </form>
-
-        <div className='row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end pb-10 flex flex-col gap-5'>
           <p className='text-sm md:text-xl font-normal'>Don't have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
           <p className='text-xs md:text-1xl font-normal text-gray-800 hover:cursor-pointer'>Terms of Use | Privacy Policy</p>
         </div>
       </div>
-
+      
       <div className="w-6 bg-white hidden md:block" />
     </div>
   );
