@@ -7,9 +7,9 @@ import { useAuth } from '../hooks/useAuth'
 import { proyectService } from '../services/proyectService'
 import StaffDisplay from '../components/StaffDisplay'
 import TaskCard from '../components/ui/TaskCard'
-import ProyectPrevisualizerUser from '../components/ui/ProyectPrevisualizerUser'
+
 function DashboardPage() {
-  const [showNewProyectModal, setShowNewProyectModal] = useState(true)
+  const [showNewProyectModal, setShowNewProyectModal] = useState(false)
   const [projects, setProjects] = useState([])
   const [project, setProject] = useState(null)
   const [isCreated, setIsCreated] = useState(false)
@@ -161,7 +161,10 @@ function DashboardPage() {
       <div className="w-full sm:w-6 bg-white"></div>
 
       {showNewProyectModal && (
-        <ProyectPrevisualizerUser />
+        <NewProyectModal
+          handleClickModal={handleModalView}
+          handleSubmit={handleCreateNewProyect}
+        />
       )}
 
     </div>
