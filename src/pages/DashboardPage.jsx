@@ -72,8 +72,10 @@ function DashboardPage() {
         </div>
 
         <div className="flex flex-col gap-3">
+          
           <p className="text-orange-600">Your projects</p>
           <div className="flex flex-col sm:flex-row gap-5">
+            
             <AddNewProyect handleClick={handleModalView} />
             <div className="w-full overflow-x-auto flex ">
               <div className="flex min-w-max gap-5">
@@ -108,7 +110,10 @@ function DashboardPage() {
           handleSubmit={handleCreateNewProyect}
         />
       )}
+      
     </div>
+
+    
 
 
   )
