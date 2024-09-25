@@ -7,15 +7,14 @@ import { useAuth } from '../hooks/useAuth'
 import { proyectService } from '../services/proyectService'
 import StaffDisplay from '../components/StaffDisplay'
 import TaskCard from '../components/ui/TaskCard'
-
+import ProyectPrevisualizerUser from '../components/ui/ProyectPrevisualizerUser'
 function DashboardPage() {
-  const [showNewProyectModal, setShowNewProyectModal] = useState(false)
+  const [showNewProyectModal, setShowNewProyectModal] = useState(true)
   const [projects, setProjects] = useState([])
   const [project, setProject] = useState(null)
   const [isCreated, setIsCreated] = useState(false)
   const { logout } = useAuth()
 
-  /* Drag  */
   const containerRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
@@ -100,36 +99,38 @@ function DashboardPage() {
         <div className="flex flex-col gap-3">
           <p className="text-orange-600 select-none">Your projects</p>
           <div className="flex flex-col sm:flex-row gap-5">
-            
+
             <AddNewProyect handleClick={handleModalView} />
-            <div
-              className="w-full overflow-x-auto flex"
-              ref={containerRef}
-              onMouseDown={handleMouseDown}
-              onMouseUp={handleMouseLeaveOrUp}
-              onMouseLeave={handleMouseLeaveOrUp}
-              onMouseMove={handleMouseMove}
-              style={{ cursor: 'grab' }}
-            >
-              <div className="flex min-w-max gap-5">
-                {projects.map((project) => {
-                  const totalHours = project.usuarios.reduce(
-                    (acc, user) => acc + user.tiempoTrabajado,
-                    0
-                  )
-                  return (
-                    <ProyectDisplay
-                      key={project.id}
-                      projectName={project.nombre}
-                      label="Hours worked"
-                      showDetails={handleShowDetails}
-                      id={project.id}
-                      time={totalHours}
-                    />
-                  )
-                })}
-              </div>
-            </div>
+            {
+              projects.length > 0 ? (<div
+                className="w-full overflow-x-auto flex"
+                ref={containerRef}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseLeaveOrUp}
+                onMouseLeave={handleMouseLeaveOrUp}
+                onMouseMove={handleMouseMove}
+                style={{ cursor: 'grab' }}
+              >
+                <div className="flex min-w-max gap-5">
+                  {projects.map((project) => {
+                    const totalHours = project.usuarios.reduce(
+                      (acc, user) => acc + user.tiempoTrabajado,
+                      0
+                    )
+                    return (
+                      <ProyectDisplay
+                        key={project.id}
+                        projectName={project.nombre}
+                        label="Hours worked"
+                        showDetails={handleShowDetails}
+                        id={project.id}
+                        time={totalHours}
+                      />
+                    )
+                  })}
+                </div>
+              </div>) : null
+            }
           </div>
         </div>
 
@@ -160,12 +161,9 @@ function DashboardPage() {
       <div className="w-full sm:w-6 bg-white"></div>
 
       {showNewProyectModal && (
-        <NewProyectModal
-          handleClickModal={handleModalView}
-          handleSubmit={handleCreateNewProyect}
-        />
+        <ProyectPrevisualizerUser />
       )}
-      
+
     </div>
   )
 }

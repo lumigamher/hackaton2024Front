@@ -106,14 +106,13 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                     />
                 </div>
 
-                {/* Cambiar layout de la grid a columnas en mobile */}
+
                 <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-1 w-full h-full mt-5 gap-5 overflow-y-auto">
 
-                    {/* Hacer que este bloque sea vertical en mobile */}
                     <div className="col-start-1 col-end-4 lg:col-start-1 lg:col-end-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-[175px_auto] lg:gap-5">
 
-                        {/* Flex direction para mobile */}
-                        <div className="flex flex-col lg:flex-row gap-5 col-start-1 col-end-4">
+
+                        <div className="flex flex-col  lg:flex-row gap-5 col-start-1 col-end-4">
                             <ProyectDisplay label="Select Photo" icon="bx bx-upload" />
                             <div>
                                 <textarea
@@ -126,8 +125,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                             </div>
                         </div>
 
-                        {/* Sección de tareas ajustada para mobile */}
-                        <div className="bg-white w-full h-full col-start-1 col-end-4 row-start-2 row-end-3 rounded-xl overflow-y-auto flex flex-col gap-5">
+                        <div className="bg-white mt-10 lg:mt-0 w-full h-full col-start-1 col-end-4 row-start-2 row-end-3 rounded-xl overflow-y-auto flex flex-col gap-5">
                             <div className="flex gap-5 flex-col lg:flex-row">
                                 <input
                                     type="text"
@@ -137,7 +135,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                                     value={task}
                                     onChange={handleInputTask}
                                 />
-                                <button onClick={saveTask}>Save</button>
+                                <button className="hover:text-green-600 text-gray-400" onClick={saveTask}>Save</button>
                             </div>
                             <div className="bg-white border-2 border-gray-200 w-full h-full rounded-2xl overflow-y-auto flex flex-col gap-5 p-5">
                                 {tasks.map((task, index) => (
