@@ -75,7 +75,7 @@ function LoginPage() {
             handleSubmit(e);
           }
         })}
-          className='items-center content-center row-start-2 row-end-3 col-start-1 md:col-start-2 flex flex-col gap-1 p-5 md:p-0'>
+          className='items-center content-center row-start-2 row-end-3 col-start-1 md:col-start-2 flex flex-col gap-1 md:p-0'>
           <h2 className='text-4xl md:text-6xl text-center font-bold mb-5'>Login</h2>
           <Input
             placeholder='User'
@@ -85,7 +85,7 @@ function LoginPage() {
             onChange={handleChange}
             required
           />
-          <div className="relative">
+          <div className="relative flex justify-center items-center">
             <i
               className={`absolute left-7 top-9 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
               onClick={toggleVisibility}
@@ -103,7 +103,7 @@ function LoginPage() {
               onClick={handleSubmit}
             ></i>
           </div>
-          <div className='items-center row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end pb-10 flex flex-col gap-1'>
+          <div className='relative items-center justify-center row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end flex flex-col gap-1'>
             <Button type="button" onClick={handleGoogleLogin}>
               <i className='bx bxl-google'></i> Google
             </Button>
