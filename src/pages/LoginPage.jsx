@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import Input from '../components/ui/Input';
-import Button from '../components/ui/Button'
+import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -18,12 +18,12 @@ const Toast = Swal.mixin({
 });
 
 function LoginPage() {
-  const { login } = useAuth()
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   });
-  const [isVisible, setisVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,26 +31,35 @@ function LoginPage() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const payload = {
       'username': formData.username,
       'password': formData.password
+    };
+    try {
+      await login(payload);
+      Toast.fire({
+        icon: 'success',
+        title: 'Inicio de sesión exitoso'
+      });
+    } catch (error) {
+      Toast.fire({
+        icon: 'error',
+        title: 'Error al iniciar sesión'
+      });
     }
-    await login(payload)
-    Toast.fire({
-      icon: 'success',
-      title: 'Inicio de sesión exitoso'
-    });
   };
 
-  const toogleVisibility = () => {
-    setisVisible(prev => !prev)
-  }
+  const toggleVisibility = () => {
+    setIsVisible(prev => !prev);
+  };
+
+  const handleFacebookLogin = () => {
+    window.location.href = "https://athlex.pro/oauth2/authorization/facebook";
+  };
 
   return (
-
     <div className="flex h-screen w-screen justify-center md:justify-between lg:justify-between bg-gray-100">
-
       <div className="w-6 bg-white hidden md:block">
         <h2 className="translate-y-7 rotate-90 font-bold">ChroniX</h2>
       </div>
@@ -70,7 +79,7 @@ function LoginPage() {
           <div className="relative">
             <i
               className={`absolute left-5 top-7 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
-              onClick={toogleVisibility}
+              onClick={toggleVisibility}
             ></i>
             <Input
               type={isVisible ? 'text' : 'password'}
@@ -85,19 +94,20 @@ function LoginPage() {
               onClick={handleSubmit}
             ></i>
           </div>
+          <Button onClick={handleFacebookLogin} className="mt-4">
+            <i className='bx bxl-facebook'></i> Sign In With Facebook
+          </Button>
           <Button> <i className='bx bxl-google'></i> Sign In With Google </Button>
         </form>
 
-        <div className='row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end pb-10 flex flex-col gap-5' >
+        <div className='row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end pb-10 flex flex-col gap-5'>
           <p className='text-sm md:text-xl font-normal'>Don't have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
           <p className='text-xs md:text-1xl font-normal text-gray-800 hover:cursor-pointer'>Terms of Use | Privacy Policy</p>
         </div>
       </div>
 
       <div className="w-6 bg-white hidden md:block" />
-
     </div>
-
   );
 }
 
