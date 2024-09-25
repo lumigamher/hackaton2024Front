@@ -3,13 +3,14 @@ import Input from '../components/ui/Input';
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { proyectService } from '../services/proyectService';
-import StaffDisplay from '../components/StaffDisplay';
 import TaskCard from '../components/ui/TaskCard';
 import { userService } from '../services/userService';
+import ProyectPrevisualizerUser from '../components/ui/ProyectPrevisualizerUser'
 
 function UserDashboardPage() {
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState(null);
+  const [showTaskModal, setshowTaskModal] = useState(false)
   const { logout } = useAuth();
 
   /* Drag  */
@@ -58,6 +59,10 @@ function UserDashboardPage() {
     setProject(await proyectService.getProyectById(id));
   };
 
+  const handleshowTaskModal = () => {
+      setshowTaskModal((prev) => !prev)
+  }
+ 
   return (
     <div className="flex flex-col sm:flex-row h-screen sm:h-auto w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-b">
       <div className="w-full sm:w-6 bg-white">
@@ -125,7 +130,10 @@ function UserDashboardPage() {
 
             </div>
             <div className="w-full flex justify-between">
-              <p className="text-orange-600 select-none ">{project.nombre} Task</p>
+              <div className='flex justify-between gap-5 items-center'>
+                <p className="text-orange-600 select-none ">{project.nombre} Task</p>
+                <i  onClick={() => setshowTaskModal(prev => !prev)} class='bx cursor-pointer bx-message-square-add'></i>
+              </div>
               <button
                 className="hover:text-red-600 hover:scale-125 hover:font-semibold pl-10 -translate-x-5 select-none duration-300"
                 onClick={() => setProject(null)}
@@ -143,6 +151,12 @@ function UserDashboardPage() {
       </div>
 
       <div className="w-full sm:w-6 bg-white"></div>
+        {
+          showTaskModal ? (
+            <ProyectPrevisualizerUser
+            close={handleshowTaskModal} />
+          ) : null
+        }
     </div>
   );
 }
