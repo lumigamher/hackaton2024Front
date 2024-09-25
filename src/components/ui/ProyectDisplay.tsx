@@ -37,7 +37,7 @@ function ProyectDisplay({ url, time, projectName, icon = 'bxs-right-top-arrow-ci
             </div>
             <div className="self-end lg:self-start mt-4 lg:mt-0">
                 <p className="rounded-full hover:cursor-pointer">
-                    <i id={id} onClick={handleClick} className={`text-gray-100 text-2xl bx ${icon}`} />
+                    <i id={id} onClick={handleClick} className={`text-gray-400 ml-2  mb- text-2xl bx ${icon}`} />
                 </p>
             </div>
         </div>

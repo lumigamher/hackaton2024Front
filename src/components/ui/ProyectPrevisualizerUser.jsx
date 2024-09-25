@@ -7,11 +7,14 @@ export default function ProyectPrevisualizerUser({ close, project }) {
 
     const handleTaskSelection = (e, id) => {
         console.log(id);
-        setSelectedTask((prev) => [...prev, {id: id}])
+        setSelectedTask((prev) => [...prev, {id: id, usuario: localStorage.getItem('id')}])
     }
 
-    const handleSaveTaskSeletion = () => {
-        const payload = {
+    const handleSaveTaskSeletion = async () => {
+        // console.log(selectedTask);
+        const response = await userService.assignTaskToUser(selectedTask)
+        if (response === 200) {
+            console.log('OUkey');
             
         }
     }
