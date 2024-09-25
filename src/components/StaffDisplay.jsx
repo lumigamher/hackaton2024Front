@@ -14,7 +14,7 @@ function StaffDisplay({ projectIn = false }) {
 
   return (
 
-    <div className='w-full h-auto flex gap-5 flex-wrap'>
+    <div className='w-full h-auto flex gap-5  select-none flex-wrap'>
       {users.length > 0 ? (
         users.map(user => (
           <StaffCard
