@@ -8,7 +8,7 @@ const local = 'http://localhost:8080'
 
 
 const instance = axios.create({
-    baseURL: testURL2
+    baseURL: testURL
 })
 
 
