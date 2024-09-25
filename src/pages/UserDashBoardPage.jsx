@@ -122,15 +122,16 @@ function UserDashboardPage() {
         {project && (
           <div>
             <div className="w-full flex justify-between">
+
+            </div>
+            <div className="w-full flex justify-between">
+              <p className="text-orange-600 select-none ">{project.nombre} Task</p>
               <button
                 className="hover:text-red-600 hover:scale-125 hover:font-semibold pl-10 -translate-x-5 select-none duration-300"
                 onClick={() => setProject(null)}
               >
                 clear
               </button>
-            </div>
-            <div className="w-full flex justify-between">
-              <p className="text-orange-600 select-none ">{project.nombre} Task</p>
             </div>
             <div className="w-full h-auto flex gap-5 flex-wrap">
               {project.tareas.map((tarea) => (
