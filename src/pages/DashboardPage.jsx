@@ -51,7 +51,7 @@ function DashboardPage() {
         <h2 className="translate-y-7 rotate-90 font-bold">ChroniX</h2>
       </div>
 
-      <div className="flex h-fit lg:h-screen w-full flex-col gap-3 bg-slate-50 p-8">
+      <div className="flex h-fit lg:h-full w-full flex-col gap-3 bg-slate-50 p-8">
         <div className="flex w-full justify-end">
           <p className="text-sm">
             <button
@@ -122,7 +122,7 @@ function DashboardPage() {
                 project.tareas.map((tarea) => (
                   <TaskCard
                   key={tarea.id}
-                  task={tarea.descripcion}
+                  task={tarea}
                   />
                 ))
               }
