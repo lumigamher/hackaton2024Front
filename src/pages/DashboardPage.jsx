@@ -6,13 +6,14 @@ import NewProyectModal from '../components/ui/NewProyectModal'
 import { useAuth } from '../hooks/useAuth'
 import { proyectService } from '../services/proyectService'
 import StaffDisplay from '../components/StaffDisplay'
-import axios from 'axios'
+import TaskCard from '../components/ui/TaskCard'
 
 function DashboardPage() {
 
   const [showNewProyectModal, setShowNewProyectModal] = useState(false)
   const [projects, setProjects] = useState([])
   const [project, setProject] = useState(false)
+  const [isCreated, setIsCreated] = useState(false)
   const { logout } = useAuth()
 
 
@@ -22,20 +23,22 @@ function DashboardPage() {
       setProjects(await data.data)
     }
     fetchProjects()
-  }, [])
+  }, [isCreated])
 
   useEffect(() => {
-    console.log(projects);
+    console.log(project);
 
-  }, [projects])
+  }, [project])
 
   const handleModalView = () => {
     setShowNewProyectModal(prev => !prev)
+    setIsCreated(prev => !prev)
   }
   const handleCreateNewProyect = () => {
     setShowNewProyectModal(prev => !prev)
   }
   const handleShowDetails = async (e) => {
+    setProject(null)
     const { id } = e.target
     setProject(await proyectService.getProyectById(id))
 
@@ -43,17 +46,17 @@ function DashboardPage() {
 
 
   return (
-    <div className="flex flex-col sm:flex-row h-screen w-screen bg-gradient-to-b from-gray-50 to-gray-300">
+    <div className="flex flex-col sm:flex-row h-screen sm:h-auto w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-b from-gray-50 to-gray-300">
       <div className="w-full sm:w-6 bg-white">
         <h2 className="translate-y-7 rotate-90 font-bold">ChroniX</h2>
       </div>
 
-      <div className="flex h-full w-full flex-col gap-3 bg-slate-50 p-8">
+      <div className="flex h-fit lg:h-screen w-full flex-col gap-3 bg-slate-50 p-8">
         <div className="flex w-full justify-end">
           <p className="text-sm">
             <button
               onClick={logout}
-              className="hover:text-red-600 hover:scale-125 hover:font-semibold duration-300"
+              className="hover:text-red-600 hover:scale-125 hover:font-semibold pl-10 -translate-x-5 duration-300"
             >
               Log out
             </button>
@@ -83,7 +86,7 @@ function DashboardPage() {
                       return acc + user.tiempoTrabajado
                     }, 0)
                     console.log(totalHours);
-                    
+
                     return (
                       <ProyectDisplay
                         key={project.id}
@@ -102,10 +105,31 @@ function DashboardPage() {
             </div>
           </div>
         </div>
-        <div>
-          <p className="text-orange-600 ">Your staff</p>
-          {project ? (<StaffDisplay projectIn={project} />) : null}
-        </div>
+        {
+          project ? (
+            <div>
+              <div className='w-full flex justify-between'>
+                <p className="text-orange-600 ">{project.nombre} staff</p>
+                <button className='hover:text-red-600 hover:scale-125 hover:font-semibold pl-10 -translate-x-5 duration-300'
+                  onClick={() => setProject(null)}> clear </button>
+              </div>
+              <StaffDisplay projectIn={project} />
+              <div className='w-full flex justify-between'>
+                <p className="text-orange-600 ">{project.nombre} Task</p>
+              </div>
+              <div className='w-full h-auto flex gap-5 flex-wrap'>
+              {
+                project.tareas.map((tarea) => (
+                  <TaskCard
+                  key={tarea.id}
+                  task={tarea.descripcion}
+                  />
+                ))
+              }
+              </div>
+            </div>
+          ) : null
+        }
       </div>
 
       <div className="w-full sm:w-6 bg-white"></div>
