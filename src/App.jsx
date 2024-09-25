@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage';
 import NotFoundPage from './pages/NotFoundPage';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './context/authContext';
+import OAuth2Callback from './components/OAuth2Callback';
 
 
 function App() {
