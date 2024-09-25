@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import Input from '../components/ui/Input';
@@ -59,6 +60,8 @@ function LoginPage() {
       password: formData.password,
       email: formData.email,
     };
+    console.log(await payload);
+
     await register(payload)
   };
 
@@ -66,6 +69,14 @@ function LoginPage() {
   const toogleVisibility = () => {
     setisVisible(prev => !prev)
   }
+
+  const handleGoogleLogin = () => {
+    window.location.href = "https://athlex.pro/oauth2/authorization/google";
+  };
+
+  const handleFacebookLogin = () => {
+    window.location.href = "https://athlex.pro/oauth2/authorization/facebook";
+  };
 
   return (
 
@@ -124,19 +135,21 @@ function LoginPage() {
             />
             {!isMatching && <p className='mt-5 text-sm text-red-500'> Passwords must match! </p>}
           </div>
-          <Button>
+          <Button type="button" onClick={handleGoogleLogin}>
             <i className='bx bxl-google'></i> Sign In With Google
           </Button>
+          <Button type="button" onClick={handleFacebookLogin}>
+            <i className='bx bxl-facebook'></i> Sign In With Facebook
+          </Button>
+          <div className='row-start-5 row-end-6 col-start-1 self-center pb-10 flex flex-col gap-5'>
+            <p className='text-xl font-normal'> Already have an account?
+              <Link to='/login' className='text-orange-400 underline'> Sign in here </Link>
+            </p>
+            <p className='text-sm md:text-lg text-gray-800 hover:cursor-pointer'>
+              Terms of Use | Privacy Policy
+            </p>
+          </div>
         </form>
-
-        <div className='row-start-5 row-end-6 col-start-1 self-end pb-10 flex flex-col gap-5'>
-          <p className='text-xl font-normal'> Already have an account?
-            <Link to='/login' className='text-orange-400 underline'> Sign in here </Link>
-          </p>
-          <p className='text-sm md:text-lg text-gray-800 hover:cursor-pointer'>
-            Terms of Use | Privacy Policy
-          </p>
-        </div>
       </div>
 
       <div className="w-6 bg-white hidden lg:block" />
