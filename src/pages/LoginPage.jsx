@@ -55,7 +55,7 @@ function LoginPage() {
   };
 
   const handleFacebookLogin = () => {
-    window.location.href = "https://athlex.pro/oauth2/authorization/facebook";
+    window.location.href = "https://main.dn8l53vpaw68b.amplifyapp.com/oauth2/authorization/facebook";
   };
 
   return (
