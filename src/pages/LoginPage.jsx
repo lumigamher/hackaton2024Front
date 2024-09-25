@@ -55,12 +55,13 @@ function LoginPage() {
   };
 
   const handleGoogleLogin = () => {
-    console.log("Iniciando sesión con Google");
+    window.location.href = "https://athlex.pro/oauth2/authorization/google";
   };
 
   const handleFacebookLogin = () => {
-    window.location.href = "https://main.dn8l53vpaw68b.amplifyapp.com/oauth2/authorization/facebook";
+    window.location.href = "https://athlex.pro/oauth2/authorization/facebook";
   };
+
 
   return (
     <div className="flex h-screen w-screen justify-center md:justify-between lg:justify-between bg-gray-100">
