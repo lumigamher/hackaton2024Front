@@ -1,13 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SelectTaskByUser from '../ui/SelectTaskByUser'
+import { userService } from '../../services/userService';
 
 export default function ProyectPrevisualizerUser({ close, project }) {
+    const [selectedTask, setSelectedTask] = useState([])
 
+    const handleTaskSelection = (e, id) => {
+        console.log(id);
+        setSelectedTask((prev) => [...prev, {id: id}])
+    }
 
-    useEffect(() => {
-        console.log(project);
-
-    }, [])
+    const handleSaveTaskSeletion = () => {
+        const payload = {
+            
+        }
+    }
 
     return (
         <div className="absolute h-screen w-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
@@ -34,10 +41,12 @@ export default function ProyectPrevisualizerUser({ close, project }) {
                                     <SelectTaskByUser
                                     key={tarea.id}
                                     task={tarea}
+                                    handleClick={handleTaskSelection}
                                     />
                                 ))
                             }
                         </div>
+                        <p onClick={handleSaveTaskSeletion} className='w-full text-center text-xl text-gray-600  px-2 py-1 hover:text-green-500 cursor-pointer '> Save Tasks </p>
                     </div>
                 </div>
             </div>

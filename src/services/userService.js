@@ -18,7 +18,16 @@ export const userService = {
     } catch (error) {
       console.warn("Error getting tareas: " + error);
     }
-  }
+  },
+  assignTaskToUser: async (payload) => {
+    try {
+      const userReponse = await axios.post('usuario-tarea/asignar', payload)
+      return userReponse
+    } catch (error) {
+      console.warn("Error assigning tasks: " + error);
+    }
+  },
+  
 
 
 }

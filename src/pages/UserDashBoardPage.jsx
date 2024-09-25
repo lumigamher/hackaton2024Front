@@ -73,9 +73,9 @@ function UserDashboardPage() {
   };
 
   const handleshowTaskModal = () => {
-      setshowTaskModal((prev) => !prev)
+    setshowTaskModal((prev) => !prev)
   }
- 
+
   return (
     <div className="flex flex-col sm:flex-row h-screen sm:h-auto w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-b">
       <div className="w-full sm:w-6 bg-white">
@@ -145,7 +145,7 @@ function UserDashboardPage() {
             <div className="w-full flex justify-between">
               <div className='flex justify-between gap-5 items-center'>
                 <p className="text-orange-600 select-none ">{project.nombre} Task</p>
-                <i  onClick={() => setshowTaskModal(prev => !prev)} class='bx cursor-pointer bx-message-square-add'></i>
+                <i onClick={() => setshowTaskModal(prev => !prev)} class='bx cursor-pointer bx-message-square-add'></i>
               </div>
               <button
                 className="hover:text-red-600 hover:scale-125 hover:font-semibold pl-10 -translate-x-5 select-none duration-300"
@@ -155,7 +155,6 @@ function UserDashboardPage() {
               </button>
             </div>
             <div className="w-full h-auto flex gap-5 flex-wrap">
-              {console.log(project.id)}
               {project.tareas.map((tarea) => (
                 tasks.includes(tarea.id) ? <TaskCard key={tarea.id} task={tarea} /> : null
               ))}
@@ -165,13 +164,13 @@ function UserDashboardPage() {
       </div>
 
       <div className="w-full sm:w-6 bg-white"></div>
-        {
-          showTaskModal ? (
-            <ProyectPrevisualizerUser
+      {
+        showTaskModal ? (
+          <ProyectPrevisualizerUser
             project={project}
             close={handleshowTaskModal} />
-          ) : null
-        }
+        ) : null
+      }
     </div>
   );
 }
