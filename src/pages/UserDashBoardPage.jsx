@@ -10,6 +10,7 @@ import ProyectPrevisualizerUser from '../components/ui/ProyectPrevisualizerUser'
 function UserDashboardPage() {
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState(null);
+  const [tasks, setTasks] = useState([]);
   const [showTaskModal, setshowTaskModal] = useState(false)
   const { logout } = useAuth();
 
@@ -42,14 +43,26 @@ function UserDashboardPage() {
   useEffect(() => {
     const fetchProjects = async () => {
       const data = await userService.getAllProjects();
-      console.log(data);
+
 
       setProjects(await data.data);
+
+
     };
+
     fetchProjects();
   }, []);
 
   useEffect(() => {
+
+    const fetchTareas = async () => {
+      const dataTareas = await userService.getAllTareasByUsernameUser();
+      console.log(dataTareas.data);
+
+      setTasks(await dataTareas.data.map(tarea => tarea.tareaId));
+    };
+
+    fetchTareas();
     console.log(project);
   }, [project]);
 
@@ -84,7 +97,7 @@ function UserDashboardPage() {
         <div>
           <p className="text-sm text-gray-500 select-none">User</p>
           <div className="flex flex-col sm:flex-row gap-5">
-            <h2 className="text-2xl font-semibold select-none">Hi, User!</h2>
+            <h2 className="text-2xl font-semibold select-none">Hi, {localStorage.getItem("username")}!</h2>
             <Input
               type="text"
               className="w-full sm:w-64 rounded-lg border-2 border-gray-100 focus:border-none focus:outline-none"
@@ -142,8 +155,9 @@ function UserDashboardPage() {
               </button>
             </div>
             <div className="w-full h-auto flex gap-5 flex-wrap">
+              {console.log(project.id)}
               {project.tareas.map((tarea) => (
-                <TaskCard key={tarea.id} task={tarea} />
+                tasks.includes(tarea.id) ? <TaskCard key={tarea.id} task={tarea} /> : null
               ))}
             </div>
           </div>
