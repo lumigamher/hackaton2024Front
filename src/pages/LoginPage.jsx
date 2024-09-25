@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import Input from '../components/ui/Input';
@@ -110,14 +111,14 @@ function LoginPage() {
             <Button type="button" onClick={handleFacebookLogin}>
               <i className='bx bxl-facebook'></i> Facebook
             </Button>
-            <p className='text-sm md:text-xl font-normal mt-20'>Don't have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
+            <p className='text-sm md:text-xl font-normal mt-20'>Don`t have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
             <p className='text-xs md:text-1xl font-normal text-gray-800 hover:cursor-pointer'>Terms of Use | Privacy Policy</p>
           </div>
         </form>
 
 
       </div>
-        
+
       <div className="w-6 bg-white hidden md:block" />
     </div>
   );
