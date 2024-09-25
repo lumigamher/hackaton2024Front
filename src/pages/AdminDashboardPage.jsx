@@ -125,6 +125,7 @@ function DashboardPage() {
                         showDetails={handleShowDetails}
                         id={project.id}
                         time={totalHours}
+                        url={project.foto}
                       />
                     )
                   })}
