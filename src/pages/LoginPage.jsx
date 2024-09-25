@@ -87,7 +87,7 @@ function LoginPage() {
           />
           <div className="relative">
             <i
-              className={`absolute left-5 top-7 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
+              className={`absolute left-7 top-9 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
               onClick={toggleVisibility}
             ></i>
             <Input
@@ -99,16 +99,16 @@ function LoginPage() {
               required
             />
             <i
-              className='absolute right-5 top-7 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt'
+              className='absolute right-7 top-9 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt'
               onClick={handleSubmit}
             ></i>
           </div>
           <div className='items-center row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end pb-10 flex flex-col gap-1'>
             <Button type="button" onClick={handleGoogleLogin}>
-              <i className='bx bxl-google'></i> Sign In With Google
+              <i className='bx bxl-google'></i> Google
             </Button>
             <Button type="button" onClick={handleFacebookLogin}>
-              <i className='bx bxl-facebook'></i> Sign In With Facebook
+              <i className='bx bxl-facebook'></i> Facebook
             </Button>
             <p className='text-sm md:text-xl font-normal mt-20'>Don't have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
             <p className='text-xs md:text-1xl font-normal text-gray-800 hover:cursor-pointer'>Terms of Use | Privacy Policy</p>

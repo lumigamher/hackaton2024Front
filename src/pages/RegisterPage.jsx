@@ -77,7 +77,7 @@ function LoginPage() {
 
       <div className='text-center grid grid-rows-4 grid-cols-1 flex-1'>
         <form onSubmit={handleSubmit}
-          className='row-start-1 row-end-5 col-start-1 flex flex-col self-center gap-5 px-5 md:px-20 lg:px-40'>
+          className='row-start-1 row-end-5 col-start-1 flex flex-col self-center items-center  gap-5 px-5 md:px-20 lg:px-40'>
           <h2 className='text-4xl md:text-5xl lg:text-6xl text-center font-bold mb-5'>
             <p className='font-normal'>Create New</p> Account
           </h2>
@@ -105,9 +105,9 @@ function LoginPage() {
             onChange={handleChange}
             required
           />
-          <div className='relative scale-105'>
+          <div className='relative '>
             <i
-              className={`absolute translate-x-5 translate-y-7 py-0.5 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
+              className={`absolute translate-x-9 translate-y-9 py-0.5 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
               onClick={toogleVisibility}
             />
             <Input
@@ -119,13 +119,13 @@ function LoginPage() {
               required
             />
             <i
-              className='absolute -translate-x-8 translate-y-7 pt-0.5 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt'
+              className='absolute -translate-x-10 translate-y-9 pt-0.5 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt'
               onClick={handleSubmit}
             />
             {!isMatching && <p className='mt-5 text-sm text-red-500'> Passwords must match! </p>}
           </div>
           <Button>
-            <i className='bx bxl-google'></i> Sign In With Google
+            <i className='bx bxl-google'></i>  Google
           </Button>
         </form>
 
