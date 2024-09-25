@@ -17,7 +17,7 @@ function ProyectDisplay({ url, time, projectName, icon = 'bxs-right-top-arrow-ci
     }
 
     return (
-        <div className={`flex h-[175px] min-w-[380px] lg:w-[360px]  bg-gray-100 justify-between rounded-3xl p-5 bg-[url('${url}')] bg-cover bg-center`}>
+        <div className={`flex h-[175px] min-w-full lg:min-w-[380px] lg:w-[360px]  bg-gray-100 justify-between rounded-3xl p-5 bg-[url('${url}')] bg-cover bg-center`}>
             <div className="flex h-full w-fit flex-col  justify-between ">
                 <div>
                     <p className="text-sm text-start  select-none  text-gray-400">{label}</p>

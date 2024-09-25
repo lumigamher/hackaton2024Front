@@ -102,34 +102,36 @@ function DashboardPage() {
           <div className="flex flex-col sm:flex-row gap-5">
             
             <AddNewProyect handleClick={handleModalView} />
-            <div
-              className="w-full overflow-x-auto flex"
-              ref={containerRef}
-              onMouseDown={handleMouseDown}
-              onMouseUp={handleMouseLeaveOrUp}
-              onMouseLeave={handleMouseLeaveOrUp}
-              onMouseMove={handleMouseMove}
-              style={{ cursor: 'grab' }}
-            >
-              <div className="flex min-w-max gap-5">
-                {projects.map((project) => {
-                  const totalHours = project.usuarios.reduce(
-                    (acc, user) => acc + user.tiempoTrabajado,
-                    0
-                  )
-                  return (
-                    <ProyectDisplay
-                      key={project.id}
-                      projectName={project.nombre}
-                      label="Hours worked"
-                      showDetails={handleShowDetails}
-                      id={project.id}
-                      time={totalHours}
-                    />
-                  )
-                })}
-              </div>
-            </div>
+            {
+              projects.length > 0 ? (<div
+                className="w-full overflow-x-auto flex"
+                ref={containerRef}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseLeaveOrUp}
+                onMouseLeave={handleMouseLeaveOrUp}
+                onMouseMove={handleMouseMove}
+                style={{ cursor: 'grab' }}
+              >
+                <div className="flex min-w-max gap-5">
+                  {projects.map((project) => {
+                    const totalHours = project.usuarios.reduce(
+                      (acc, user) => acc + user.tiempoTrabajado,
+                      0
+                    )
+                    return (
+                      <ProyectDisplay
+                        key={project.id}
+                        projectName={project.nombre}
+                        label="Hours worked"
+                        showDetails={handleShowDetails}
+                        id={project.id}
+                        time={totalHours}
+                      />
+                    )
+                  })}
+                </div>
+              </div>) : null
+            }
           </div>
         </div>
 
