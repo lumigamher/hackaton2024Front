@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import Input from '../components/ui/Input';
@@ -75,7 +76,7 @@ function LoginPage() {
             handleSubmit(e);
           }
         })}
-          className='items-center content-center row-start-2 row-end-3 col-start-1 md:col-start-2 flex flex-col gap-1 md:p-0'>
+          className='items-center content-center row-start-2 row-end-3 col-start-1 md:col-start-2 flex flex-col gap-5 md:p-0'>
           <h2 className='text-4xl md:text-6xl text-center font-bold mb-5'>Login</h2>
           <Input
             placeholder='User'
@@ -87,7 +88,7 @@ function LoginPage() {
           />
           <div className="relative flex justify-center items-center">
             <i
-              className={`absolute left-7 top-9 hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
+              className={`absolute left-5 text-xl hover:cursor-pointer bx-low-vision bx ${isVisible ? 'text-gray-200' : 'text-black'}`}
               onClick={toggleVisibility}
             ></i>
             <Input
@@ -99,25 +100,25 @@ function LoginPage() {
               required
             />
             <i
-              className='absolute right-7 top-9 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt'
+              className='absolute right-5 hover:cursor-pointer text-gray-400 bx bx-right-arrow-alt text-3xl'
               onClick={handleSubmit}
             ></i>
           </div>
-          <div className='relative items-center justify-center row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end flex flex-col gap-1'>
+          <div className='relative items-center justify-center row-start-3 row-end-4 col-start-1 md:col-start-2 self-center md:self-end flex flex-col gap-5'>
             <Button type="button" onClick={handleGoogleLogin}>
               <i className='bx bxl-google'></i> Google
             </Button>
             <Button type="button" onClick={handleFacebookLogin}>
               <i className='bx bxl-facebook'></i> Facebook
             </Button>
-            <p className='text-sm md:text-xl font-normal mt-20'>Don't have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
+            <p className='text-sm md:text-xl font-normal mt-20'>Don`t have an account? <Link to='/register' className='text-orange-400 underline'>Sign up here</Link></p>
             <p className='text-xs md:text-1xl font-normal text-gray-800 hover:cursor-pointer'>Terms of Use | Privacy Policy</p>
           </div>
         </form>
 
 
       </div>
-        
+
       <div className="w-6 bg-white hidden md:block" />
     </div>
   );

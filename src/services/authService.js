@@ -15,12 +15,15 @@ export const authService = {
     },
     register: async (credentials) => {
         try {
-            const response = await axios.post('/auth/register', credentials)
-            return response
+            const response = await axios.post('/auth/register', credentials, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            return response;
         } catch (error) {
             console.warn('Error during register: ' + error);
-            handleErrors(error)
-
+            handleErrors(error);
         }
     }
 }
