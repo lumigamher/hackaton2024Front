@@ -49,8 +49,8 @@ function DashboardPage() {
   }, [isCreated])
 
   useEffect(() => {
-    console.log(project)
-  }, [project])
+    console.log(projects)
+  }, [projects])
 
   const handleModalView = () => {
     setShowNewProyectModal((prev) => !prev)
@@ -125,6 +125,7 @@ function DashboardPage() {
                         showDetails={handleShowDetails}
                         id={project.id}
                         time={totalHours}
+                        url={project.foto}
                       />
                     )
                   })}
