@@ -76,6 +76,20 @@ function UserDashboardPage() {
     setshowTaskModal((prev) => !prev)
   }
 
+  function formatSeconds(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  }
+
+
+
   return (
     <div className="flex flex-col sm:flex-row h-screen sm:h-auto w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-b">
       <div className="w-full sm:w-6 bg-white">
@@ -118,7 +132,7 @@ function UserDashboardPage() {
           >
             <div className="flex min-w-max gap-5">
               {projects?.map((project) => {
-                const totalHours = project.usuarios.reduce(
+                const seconds = project.usuarios.reduce(
                   (acc, user) => user.username = localStorage.getItem("username") ? acc + user.tiempoTrabajado : 0,
                   0
                 );
@@ -129,7 +143,8 @@ function UserDashboardPage() {
                     label="Hours worked"
                     showDetails={handleShowDetails}
                     id={project.id}
-                    time={totalHours}
+                    time={formatSeconds(seconds)}
+                    url={project.foto}
                   />
                 );
               })}
@@ -145,7 +160,7 @@ function UserDashboardPage() {
             <div className="w-full flex justify-between">
               <div className='flex justify-between gap-5 items-center'>
                 <p className="text-orange-600 select-none ">{project.nombre} Task</p>
-                <i onClick={() => setshowTaskModal(prev => !prev)} class='bx cursor-pointer bx-message-square-add'></i>
+                <i onClick={() => setshowTaskModal(prev => !prev)} className='bx cursor-pointer bx-message-square-add'></i>
               </div>
               <button
                 className="hover:text-red-600 hover:scale-125 hover:font-semibold pl-10 -translate-x-5 select-none duration-300"
@@ -170,7 +185,7 @@ function UserDashboardPage() {
             project={project}
             close={handleshowTaskModal}
             handleview={handleshowTaskModal}
-            />
+          />
 
         ) : null
       }

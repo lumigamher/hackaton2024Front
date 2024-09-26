@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import SelectTaskByUser from '../ui/SelectTaskByUser'
 import { userService } from '../../services/userService';
@@ -44,12 +46,12 @@ export default function ProyectPrevisualizerUser({ close, project, handleview })
                         />
                         <div className="flex flex-col gap-3	">
                             {
-                                project.tareas.map(tarea => (
+                                project.tareas.map(tarea => (tarea.estadoTarea == 1 ?
                                     <SelectTaskByUser
                                         key={tarea.id}
                                         task={tarea}
                                         handleClick={handleTaskSelection}
-                                    />
+                                    /> : null
                                 ))
                             }
                         </div>

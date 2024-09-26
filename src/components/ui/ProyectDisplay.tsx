@@ -8,7 +8,7 @@ interface Props {
     showDetails: any;
 }
 
-function ProyectDisplay({ url, time, projectName, icon = 'bxs-right-top-arrow-circle', label, showDetails, id }: Props) {
+function ProyectDisplay({ url, time, projectName, icon = 'bxs-right-top-arrow-circle', label, showDetails, id}: Props) {
     const handleClick = (e: any) => {
         showDetails(e);
     };
@@ -26,7 +26,7 @@ function ProyectDisplay({ url, time, projectName, icon = 'bxs-right-top-arrow-ci
             <div className="flex h-full w-fit flex-col  justify-between ">
                 <div>
                     <p className="text-sm text-start select-none text-gray-400">{label}</p>
-                    <h2 className="text-2xl font-light text-start p-1 select-none text-black">{time}</h2>
+                    <h2 className="text-2xl font-light text-start p-1 select-none text-white">{time}</h2>
                 </div>
                 <h2 
                     className="self-start rounded-xl bg-white px-3 py-2 font-normal text-black cursor-pointer select-none"
