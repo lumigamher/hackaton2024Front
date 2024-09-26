@@ -2,18 +2,18 @@ import React from 'react'
 
 function StaffCard({name, workedTime}) {
     return (
-        <div className=" w-full sm:h-auto lg:w-[380px] lg:h-[200px] border-2 border-gray-100 rounded-xl grid grid-rows-[70%_30%] p-3">
+        <div className=" mt-3 mb-3 w-full sm:h-auto lg:w-[390px] lg:h-[175px] border-2 border-gray-100 rounded-[24px] grid grid-rows-[70%_30%] p-3">
             <div className="w-full h-full flex justify-between items-center pb-5 px-3">
                 <img
-                    src=""
+                    src="https://media.licdn.com/dms/image/v2/D4E03AQFKLF8DuNBB3w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1720807623736?e=1732752000&v=beta&t=WiSXUkumRVbPPVQH_qZtKIVfy5D-pEU5ITAs3RrzXM8"
                     alt="profile pic"
-                    className="w-16 h-16 rounded-full border-2 border-gray-100"
+                    className="w-[70px] h-[70px] rounded-full border-2 border-gray-100"
                 />
                 <div className="flex justify-center w-full items-center gap-5">
                     <img
                         src=""
                         alt="project img"
-                        className="w-16 h-16 rounded-xl border-2 border-gray-100 shadow-lg bg-gray "
+                        className="w-[70px] h-[70px] rounded-xl border-2 border-gray-100 bg-gray "
                     />
                 </div>
             </div>
@@ -21,7 +21,7 @@ function StaffCard({name, workedTime}) {
                 <p className="text-center h-full flex items-center border-2 border-gray-100 px-2 rounded-2xl">
                     {name}
                 </p>
-                <div className="flex flex-col text-center">
+                <div className="flex flex-col text-center items-end">
                     <p className="text-gray-400">Hours worked</p>
                     <p className="text-2xl"> {workedTime}</p>
                 </div>
