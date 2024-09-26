@@ -4,9 +4,9 @@ import SockJS from 'sockjs-client';
 import { Typography, Button } from '@mui/material';
 
 const Cronometro = () => {
-  const [duracion, setDuracion] = useState(0); // Tiempo transcurrido en milisegundos
-  const [isRunning, setIsRunning] = useState(false); // Estado del cronómetro
-  const [stompClient, setStompClient] = useState(null); // Cliente STOMP
+  const [duracion, setDuracion] = useState(0); 
+  const [isRunning, setIsRunning] = useState(false); 
+  const [stompClient, setStompClient] = useState(null); 
 
   useEffect(() => {
     // Conectar al WebSocket
@@ -17,17 +17,17 @@ const Cronometro = () => {
       console.log("Conexión WebSocket exitosa");
       client.subscribe('/topic/cronometro', (message) => {
         const receivedMessage = JSON.parse(message.body);
-        console.log("Mensaje recibido:", receivedMessage); // Log para ver el mensaje recibido
+        console.log("Mensaje recibido:", receivedMessage); 
         
         if (receivedMessage.fechaInicio) {
-            console.log("Iniciando cronómetro..."); // Mensaje de inicio
-            setDuracion(0); // Reinicia el cronómetro
-            setIsRunning(true); // Cambia el estado a "iniciado"
+            console.log("Iniciando cronómetro..."); 
+            setDuracion(0); 
+            setIsRunning(true); 
         }
         
         if (receivedMessage.fechaFin) {
-            console.log("Deteniendo cronómetro..."); // Mensaje de fin
-            setIsRunning(false); // Cambia el estado a "detenido"
+            console.log("Deteniendo cronómetro..."); 
+            setIsRunning(false); 
         }
     });
     
@@ -43,18 +43,18 @@ const Cronometro = () => {
   }, []);
 
   useEffect(() => {
-    console.log("Estado isRunning:", isRunning); // Log para verificar si isRunning cambia
+    console.log("Estado isRunning:", isRunning); 
 
     let interval;
     if (isRunning) {
-      console.log("Cronómetro está corriendo"); // Verifica que el cronómetro comienza
+      console.log("Cronómetro está corriendo"); 
       interval = setInterval(() => {
-        setDuracion((prevDuracion) => prevDuracion + 1000); // Incrementar en 1000 ms (1 segundo)
+        setDuracion((prevDuracion) => prevDuracion + 1000); 
       }, 1000);
     }
     return () => {
       if (interval) {
-        console.log("Limpiando intervalo..."); // Mensaje cuando se detiene el cronómetro o el componente se desmonta
+        console.log("Limpiando intervalo..."); 
         clearInterval(interval);
       }
     };
@@ -63,9 +63,9 @@ const Cronometro = () => {
   const iniciarCronometro = () => {
     if (stompClient && stompClient.connected) {
       const cronometro = {
-        usuario: 'Usuario', // Cambia esto según sea necesario
+        usuario: 'Usuario', 
       };
-      console.log("Enviando mensaje para iniciar cronómetro..."); // Log para confirmar el envío
+      console.log("Enviando mensaje para iniciar cronómetro..."); 
       stompClient.send('/app/iniciar', {}, JSON.stringify(cronometro));
     } else {
       console.log("No hay conexión WebSocket establecida");
@@ -77,10 +77,10 @@ const Cronometro = () => {
       const cronometro = {
         usuario: 'Usuario',
       };
-      console.log("Enviando mensaje para detener cronómetro..."); // Log para confirmar el envío
+      console.log("Enviando mensaje para detener cronómetro..."); 
       stompClient.send('/app/detener', {}, JSON.stringify(cronometro));
     }
-    setIsRunning(false); // Detener el cronómetro localmente
+    setIsRunning(false); 
   };
 
   const calcularDuracion = () => {

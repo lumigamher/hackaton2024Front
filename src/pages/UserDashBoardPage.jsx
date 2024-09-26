@@ -6,6 +6,7 @@ import { proyectService } from '../services/proyectService';
 import StaffDisplay from '../components/StaffDisplay';
 import TaskCard from '../components/ui/TaskCard';
 import { userService } from '../services/userService';
+import Cronometro from '../components/ui/Cronometro';
 
 function UserDashboardPage() {
   const [projects, setProjects] = useState([]);
@@ -98,6 +99,7 @@ function UserDashboardPage() {
             onMouseMove={handleMouseMove}
             style={{ cursor: 'grab' }}
           >
+            <Cronometro></Cronometro>
             <div className="flex min-w-max gap-5">
               {projects?.map((project) => {
                 const totalHours = project.usuarios.reduce(
