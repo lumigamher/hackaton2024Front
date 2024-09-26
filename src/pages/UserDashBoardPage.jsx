@@ -130,6 +130,7 @@ function UserDashboardPage() {
             onMouseMove={handleMouseMove}
             style={{ cursor: 'grab' }}
           >
+            <Cronometro></Cronometro>
             <div className="flex min-w-max gap-5">
               {projects?.map((project) => {
                 const seconds = project.usuarios.reduce(
