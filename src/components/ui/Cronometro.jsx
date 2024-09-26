@@ -10,7 +10,7 @@ const Cronometro = ({ task, id, handleClick, icon = 'bx bxs-right-top-arrow-circ
 
   useEffect(() => {
     // Conectar al WebSocket
-    const socket = new SockJS('http://localhost:8080/ws');
+    const socket = new SockJS('https://athlex.pro/ws');
     const client = Stomp.over(socket);
 
     client.connect({}, () => {
