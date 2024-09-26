@@ -167,6 +167,15 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                                 />
                             ))}
                         </div>
+
+                        <div className="flex justify-end p-5">
+                            <button
+                                className="border-2 border-gray-200 py-1 px-2 hover:bg-gray-200 hover:text-black text-gray-400 rounded-xl"
+                                onClick={handleCreateProyect}
+                            >
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
