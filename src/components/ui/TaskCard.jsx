@@ -1,21 +1,51 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-refresh/only-export-components */
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export const estados = {
   1: 'Asignada',
   2: 'Completada',
   3: 'En proceso'
-}
+};
 
-function TaskCard({ task }) {
+function TaskCard({ task, handleClick, id, icon = 'bx bxs-right-top-arrow-circle text-white text-lg' }) {
+  console.log(task);
+
   return (
-    <div className='max-w-[380px] select-none sm:min-w-full lg:min-w-[380px] max-h-[175px] min-h-[175px] p-5 border-2 border-gray-100 flex flex-col gap-5 rounded-3xl'>
-      <h2 className='text-xl font-bold'>Task</h2>
-      <div className='flex justify-between'>
-        <p className='text-gray-700'>{task.nombre}</p>
-        <p className='text-gray-700'>{estados[task.estadoTarea]}</p>
+    <div className='relative w-[175px] h-[175px] select-none p-5 bg-gradient-to-br from-orange-200 via-yellow-300 to-orange-400 shadow-lg flex flex-col justify-between items-center rounded-2xl'>
+      {/* Ícono de la esquina superior derecha */}
+      <div className='absolute top-2 right-2'>
+        <button className='text-xs text-gray-600'>
+          <i id={id} onClick={handleClick} className={`text-gray-400 ml-2  mb- text-2xl bx ${icon}`} />
+        </button>
+      </div>
+
+      {/* Título de la tarea */}
+      <h2 className='text-sm font-semibold text-gray-800 self-start'>{task.nombre}</h2>
+
+      {/* Cronómetro */}
+      <div className='text-2xl font-mono text-gray-800'>
+        {task.cronometro}
+      </div>
+
+      {/* Botones: Start y Pausa */}
+      <div className='flex items-center space-x-2 self-start'>
+        <button className='px-4 py-2 bg-white text-yellow-600 rounded-full shadow-md '>
+          Start
+        </button>
       </div>
     </div>
-  )
+  );
 }
+TaskCard.propTypes = {
+  task: PropTypes.shape({
+    nombre: PropTypes.string.isRequired,
+    cronometro: PropTypes.string.isRequired,
+  }).isRequired,
+  handleClick: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+};
 
-export default TaskCard
+export default TaskCard;

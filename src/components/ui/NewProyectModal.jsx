@@ -30,8 +30,15 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         setTask(e.target.value);
     };
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            saveTask();
+        }
+    };
+
     const deleteTask = (e) => {
-        const { id } = e.target
+        const { id } = e.target;
         setTasks((prevData) => {
             const updatedTasks = prevData.filter(task => task.nombre !== id);
             setNewProyect((prevData) => ({
@@ -41,8 +48,8 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
             setTask("");
             return updatedTasks;
         });
+    };
 
-    }
     const saveTask = () => {
         setTasks((prevData) => {
             const updatedTasks = [...prevData, { nombre: task, estadoTarea: 1 }];
@@ -57,14 +64,12 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
 
     const toggleAddUser = (id, state) => {
         if (state) {
-            console.log('se añadio');
             setUsers((prevData) => {
                 const updatedUsers = [...prevData, { id: id }];
                 setNewProyect((prevData) => ({ ...prevData, usuarios: updatedUsers }));
                 return updatedUsers;
             });
         } else {
-            console.log('se elimino');
             setUsers((prevData) => {
                 const updatedUsers = prevData.filter(user => user.id !== id);
                 setNewProyect((prevData) => ({ ...prevData, usuarios: updatedUsers }));
@@ -74,28 +79,35 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     };
 
     const handleCreateProyect = async () => {
-        console.log(newProyect);
-        const response = await proyectService.createProyect(newProyect)
-        if (await response.status == 201) {
-            console.log("guardado");
-            handleClickModal()
+        const response = await proyectService.createProyect(newProyect);
+        if (await response.status === 201) {
+            console.log("Proyecto guardado");
+            handleClickModal();
         }
+    };
 
+    const handleCloseModal = () => {
+        handleCreateProyect(); // Guardar el proyecto al cerrar el modal
     };
 
     return (
         <div className="absolute w-screen h-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
-            <div className="w-full lg:h-full h-auto bg-white lg:shadow-2xl rounded-t-2xl p-5 lg:p-10 lg:row-start-2 lg:row-end-7 lg:col-start-2 lg:col-end-4 flex flex-col">
+            <div className="w-[900px] mx-auto lg:h-full h-auto bg-white lg:shadow-2xl rounded-[24px] p-5 lg:p-10 lg:row-start-2 lg:row-end-7 lg:col-start-2 lg:col-end-4 flex flex-col relative">
 
-                {/* Ajuste de tamaño de ícono para mobile */}
-                <div className="flex justify-end">
-                    <i
-                        className="text-3xl lg:text-5xl text-gray-400 hover:scale-105 cursor-pointer duration-150 bx bxs-x-square"
-                        onClick={handleClickModal}
-                    ></i>
+                {/* Ajuste del botón de cerrar con ícono SVG */}
+                <div className="absolute top-5 right-5 cursor-pointer" onClick={handleCloseModal}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="2em"
+                        height="2em"
+                        viewBox="0 0 16 16"
+                        fill="rgba(0, 0, 0, 0.08)" // Color negro al 8%
+                    >
+                        <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-1.414l-2-2L4.586 6l2 2l-2 2L6 11.414l2-2l2 2L11.414 10l-2-2l2-2L10 4.586z"></path>
+                    </svg>
                 </div>
 
-                {/* Ajuste del input para mobile */}
+                {/* Ajuste del input para el nombre del proyecto */}
                 <div className="w-full">
                     <input
                         name="nombre"
@@ -106,38 +118,34 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                     />
                 </div>
 
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 grid-rows-1 w-full h-full mt-5 gap-5 overflow-y-auto">
-
+                <div className="w-[900px] grid grid-cols-1 lg:grid-cols-3 grid-rows-1 h-full mt-5 gap-5 overflow-y-auto">
                     <div className="col-start-1 col-end-4 lg:col-start-1 lg:col-end-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-[175px_auto] lg:gap-5">
-
-
-                        <div className="flex flex-col  lg:flex-row gap-5 col-start-1 col-end-4">
+                        <div className="flex flex-col lg:flex-row gap-10 col-start-1 col-end-4">
                             <ProyectDisplay label="Select Photo" icon="bx bx-upload" />
                             <div>
                                 <textarea
                                     name="descripcion"
                                     value={newProyect.descripcion}
                                     onChange={handleChange}
-                                    className="border-2 w-full h-full p-3 border-gray-100 rounded-xl text-left resize-none focus:outline-none"
+                                    className="border-[2px] w-[175px] h-[175px] p-3 border-[rgba(0,0,0,0.08)] rounded-[24px] text-left resize-none focus:outline-none"
                                     placeholder="Description"
                                 ></textarea>
                             </div>
                         </div>
 
-                        <div className="bg-white mt-10 lg:mt-0 w-full h-full col-start-1 col-end-4 row-start-2 row-end-3 rounded-xl overflow-y-auto flex flex-col gap-5">
+                        <div className="bg-white mt-10 lg:mt-0 w-full h-full col-start-1 col-end-4 row-start-2 row-end-3 rounded-[24px] overflow-y-auto flex flex-col gap-5">
                             <div className="flex gap-5 flex-col lg:flex-row">
                                 <input
                                     type="text"
                                     name="task"
-                                    className="w-full border-2 border-gray-200 rounded-xl py-3 px-2 focus:outline-none"
+                                    className="w-full border-[2px] border-[rgba(0,0,0,0.08)] rounded-[24px] py-3 px-5 focus:outline-none"
                                     placeholder="Add task"
                                     value={task}
                                     onChange={handleInputTask}
+                                    onKeyPress={handleKeyPress}
                                 />
-                                <button className="hover:text-green-600 text-gray-400" onClick={saveTask}>Save</button>
                             </div>
-                            <div className="bg-white border-2 border-gray-200 w-full h-full rounded-2xl overflow-y-auto flex flex-col gap-5 p-5">
+                            <div className="bg-white border-[2px] border-[rgba(0,0,0,0.08)] w-full h-full rounded-[24px] overflow-y-auto flex flex-col gap-5 p-5">
                                 {tasks.map((task, index) => (
                                     <AssignedTask taskName={task.nombre} key={index} deleteTask={deleteTask} />
                                 ))}
@@ -145,12 +153,11 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                         </div>
                     </div>
 
-  
-                    <div className="col-start-1 col-end-4 lg:col-start-3 lg:col-end-4 bg-white border-2 border-gray-100 rounded-xl grid grid-rows-[auto_auto_auto]">
-                        <p className="w-full text-center  p-5 text-lg lg:text-xl text-orange-600">
+                    <div className="col-start-1 col-end-4 lg:col-start-3 lg:col-end-4 bg-white border-[2px] border-[rgba(0,0,0,0.08)] rounded-[24px] grid grid-rows-[auto_auto_auto] w-[175px]">
+                        <p className="w-full text-center p-5 text-lg lg:text-xl text-orange-600">
                             Staff Available
                         </p>
-                        <div className="overflow-y-auto  flex flex-col gap-5 p-5">
+                        <div className="overflow-y-auto flex flex-col gap-5 p-5">
                             {staff.map((user) => (
                                 <UserAvailableModal
                                     name={user.nombre + " " + user.apellido}
@@ -160,6 +167,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                                 />
                             ))}
                         </div>
+
                         <div className="flex justify-end p-5">
                             <button
                                 className="border-2 border-gray-200 py-1 px-2 hover:bg-gray-200 hover:text-black text-gray-400 rounded-xl"
@@ -172,7 +180,6 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                 </div>
             </div>
         </div>
-
     );
 }
 

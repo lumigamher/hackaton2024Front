@@ -1,35 +1,43 @@
 interface Props {
-    url: string,
-    id: string
+    url: string;
+    id: string;
     time: string;
     projectName: string;
-    icon: string,
-    label: string,
-    showDetails: any
+    icon: string;
+    label: string;
+    showDetails: any;
 }
 
-function ProyectDisplay({ url, time, projectName, icon = 'bxs-right-top-arrow-circle', label, showDetails, id }: Props) {
+function ProyectDisplay({ url, time, projectName, icon = 'bxs-right-top-arrow-circle', label, showDetails, id}: Props) {
+    const handleClick = (e: any) => {
+        showDetails(e);
+    };
 
+    const backgroundImageStyle = {
+    backgroundImage: `url(${url})`
+  };
 
-    const handleClick= (e: any) => {
-        showDetails(e)
-        
-    }
-
+  const boxShadowStyle = {
+    boxShadow: 'inset 0 0 5px 2px rgba(255, 255, 255, 0.5)'
+  };
     return (
-        <div className={`flex h-[175px] min-w-full lg:min-w-[380px] lg:w-[360px]  bg-gray-100 justify-between rounded-3xl p-5 bg-[url('${url}')] bg-cover bg-center`}>
+        <div className="flex h-[175px] min-w-full lg:min-w-[380px] lg:w-[360px] bg-gray-100 justify-between rounded-3xl p-5 bg-cover bg-center"
+      style={{ ...backgroundImageStyle, ...boxShadowStyle }}>
             <div className="flex h-full w-fit flex-col  justify-between ">
                 <div>
-                    <p className="text-sm text-start  select-none  text-gray-400">{label}</p>
-                    <h2 className="text-2xl font-light text-start p-1 select-none  text-black">{time}</h2>
+                    <p className="text-sm text-start select-none text-gray-400">{label}</p>
+                    <h2 className="text-2xl font-light text-start p-1 select-none text-white">{time}</h2>
                 </div>
-                <h2 className="hover:scale-105 duration-300 hover:cursor-pointer select-none hover:bg-slate-100 self-start rounded-xl bg-white px-3 py-2 font-normal">
+                <h2 
+                    className="self-start rounded-xl bg-white px-3 py-2 font-normal text-black cursor-pointer select-none"
+                    onClick={handleClick}
+                >
                     {projectName}
                 </h2>
             </div>
-            <div>
+            <div className="self-end lg:self-start mt-4 lg:mt-0">
                 <p className="rounded-full hover:cursor-pointer">
-                    <i id={id} onClick={handleClick} className={`text-gray-400 text-2xl bx ${icon}`} />
+                    <i id={id} onClick={handleClick} className={`text-gray-400 ml-2  mb- text-2xl bx ${icon}`} />
                 </p>
             </div>
         </div>

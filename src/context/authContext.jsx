@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { authService } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
+import axios from "../api/axiosInstace";
 
 const AuthContext = createContext();
 
@@ -25,9 +26,14 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (token) {
+        const role = localStorage.getItem('role')
+        if (token && role) {
             setisAuthenticated(true);
-            // navigate("/dashboard");
+            if (role === 'ADMIN') {
+                navigate('/dashboard-admin');
+            } else {
+                navigate('/dashboard-user');
+            }
         } else {
             setisAuthenticated(false);
         }
@@ -36,15 +42,26 @@ export const AuthProvider = ({ children }) => {
     const login = async (credentials) => {
         const response = await authService.login(credentials);
         localStorage.setItem("username", credentials.username);
+        const responseId = await axios.get(`/usuarios/username/${localStorage.getItem('username')}`);
+
+
+        localStorage.setItem("id", responseId.data.id);
+        console.log(localStorage.getItem("id"));
+
+        console.log(response);
+
         if (response.data.token) {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('refreshToken', response.data.refreshToken);
+            localStorage.setItem('role', response.data.rols[0]);
 
             setisAuthenticated(true);
             setRoles(response.data.rols.map(role => role.rol));
             if (response.data.rols.some(role => role.rol === 'ADMIN')) {
+                localStorage.setItem('role', 'ADMIN')
                 navigate('/dashboard-admin');
             } else {
+                localStorage.setItem('role', 'USER')
                 navigate('/dashboard-user');
             }
         }
