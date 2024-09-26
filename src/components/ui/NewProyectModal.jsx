@@ -5,12 +5,16 @@ import useFetchStaff from "../../hooks/useFetchStaff";
 import { default as axios } from "../../api/axiosInstace";
 import { useEffect, useRef, useState } from "react";
 import { proyectService } from "../../services/proyectService";
-useRef
+import s3 from '../../api/awsConfig'
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+
+
 
 function NewProyectModal({ handleClickModal, handleSubmit }) {
     const { staff, loading, error, refetch } = useFetchStaff();
     const imgInput = useRef(null)
     const [image, setImage] = useState(null)
+    const [imgURL, setIgmUrl] = useState(null)
     const [tasks, setTasks] = useState([]);
     const [users, setUsers] = useState([]);
     const [task, setTask] = useState("");
@@ -20,8 +24,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         descripcion: "",
         foto: "",
         usuarios: users,
-        tareas: tasks,
-        foto: image
+        tareas: tasks
     });
 
     const handleChange = (e) => {
@@ -85,7 +88,9 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     const handleCreateProyect = async () => {
         console.log(newProyect);
 
-        // const response = await proyectService.createProyect(newProyect);
+        const response = await proyectService.createProyect(newProyect);
+        /* enviar foto */
+        uploadFile(image)
         if (await response.status === 201) {
             console.log("Proyecto guardado");
             handleClickModal();
@@ -103,22 +108,38 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setImage(URL.createObjectURL(file));
+            setImage(file);
+            setIgmUrl(URL.createObjectURL(file));
 
         }
     };
 
     useEffect(() => {
         console.log(image);
-        setNewProyect((prevData) => ({ ...prevData, foto: image }))
-        
+        // setNewProyect((prevData) => ({ ...prevData, foto: image }))
+
     }, [image])
 
     useEffect(() => {
         console.log(newProyect);
-        
+
     }, [newProyect])
-    
+    const uploadFile = async (file) => {
+        const params = {
+          Bucket: 'chronix-almacenamiento',
+          Key: file.name,                 
+          Body: file,                      
+          ContentType: file.type           
+        };
+      
+        try {
+          const data = await s3.send(new PutObjectCommand(params));
+          console.log('File uploaded successfully:', data);
+        } catch (err) {
+          console.log('Error uploading file:', err);
+        }
+      };
+      
 
     return (
         <div className="absolute w-screen h-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
@@ -151,7 +172,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                 <div className="w-[900px] grid grid-cols-1 lg:grid-cols-3 grid-rows-1 h-full mt-5 gap-5 overflow-y-auto">
                     <div className="col-start-1 col-end-4 lg:col-start-1 lg:col-end-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-[175px_auto] lg:gap-5">
                         <div className="flex flex-col lg:flex-row gap-10 col-start-1 col-end-4">
-                            <div onClick={uploadImg} className="cursor-pointer"> <ProyectDisplay label="Select Photo" icon="bx bx-upload" url={image} />
+                            <div onClick={uploadImg} className="cursor-pointer"> <ProyectDisplay label="Select Photo" icon="bx bx-upload" url={imgURL} />
                                 <input
                                     type="file"
                                     ref={imgInput}
