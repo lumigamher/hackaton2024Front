@@ -3,11 +3,14 @@ import UserAvailableModal from "./UserAvailableModal";
 import AssignedTask from "./AssignedTask";
 import useFetchStaff from "../../hooks/useFetchStaff";
 import { default as axios } from "../../api/axiosInstace";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { proyectService } from "../../services/proyectService";
+useRef
 
 function NewProyectModal({ handleClickModal, handleSubmit }) {
     const { staff, loading, error, refetch } = useFetchStaff();
+    const imgInput = useRef(null)
+    const [image, setImage] = useState(null)
     const [tasks, setTasks] = useState([]);
     const [users, setUsers] = useState([]);
     const [task, setTask] = useState("");
@@ -18,6 +21,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         foto: "",
         usuarios: users,
         tareas: tasks,
+        foto: image
     });
 
     const handleChange = (e) => {
@@ -79,7 +83,9 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     };
 
     const handleCreateProyect = async () => {
-        const response = await proyectService.createProyect(newProyect);
+        console.log(newProyect);
+
+        // const response = await proyectService.createProyect(newProyect);
         if (await response.status === 201) {
             console.log("Proyecto guardado");
             handleClickModal();
@@ -87,27 +93,51 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     };
 
     const handleCloseModal = () => {
-        handleCreateProyect(); // Guardar el proyecto al cerrar el modal
+        handleCreateProyect();
     };
+
+    const uploadImg = () => {
+        imgInput.current.click();
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImage(URL.createObjectURL(file));
+
+        }
+    };
+
+    useEffect(() => {
+        console.log(image);
+        setNewProyect((prevData) => ({ ...prevData, foto: image }))
+        
+    }, [image])
+
+    useEffect(() => {
+        console.log(newProyect);
+        
+    }, [newProyect])
+    
 
     return (
         <div className="absolute w-screen h-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
             <div className="w-[900px] mx-auto lg:h-full h-auto bg-white lg:shadow-2xl rounded-[24px] p-5 lg:p-10 lg:row-start-2 lg:row-end-7 lg:col-start-2 lg:col-end-4 flex flex-col relative">
 
-                {/* Ajuste del botón de cerrar con ícono SVG */}
+
                 <div className="absolute top-5 right-5 cursor-pointer" onClick={handleCloseModal}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="2em"
                         height="2em"
                         viewBox="0 0 16 16"
-                        fill="rgba(0, 0, 0, 0.08)" // Color negro al 8%
+                        fill="rgba(0, 0, 0, 0.08)"
                     >
                         <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-1.414l-2-2L4.586 6l2 2l-2 2L6 11.414l2-2l2 2L11.414 10l-2-2l2-2L10 4.586z"></path>
                     </svg>
                 </div>
 
-                {/* Ajuste del input para el nombre del proyecto */}
+
                 <div className="w-full">
                     <input
                         name="nombre"
@@ -121,7 +151,14 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                 <div className="w-[900px] grid grid-cols-1 lg:grid-cols-3 grid-rows-1 h-full mt-5 gap-5 overflow-y-auto">
                     <div className="col-start-1 col-end-4 lg:col-start-1 lg:col-end-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-[175px_auto] lg:gap-5">
                         <div className="flex flex-col lg:flex-row gap-10 col-start-1 col-end-4">
-                            <ProyectDisplay label="Select Photo" icon="bx bx-upload" />
+                            <div onClick={uploadImg} className="cursor-pointer"> <ProyectDisplay label="Select Photo" icon="bx bx-upload" url={image} />
+                                <input
+                                    type="file"
+                                    ref={imgInput}
+                                    onChange={handleFileChange}
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
                             <div>
                                 <textarea
                                     name="descripcion"
@@ -130,6 +167,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                                     className="border-[2px] w-[175px] h-[175px] p-3 border-[rgba(0,0,0,0.08)] rounded-[24px] text-left resize-none focus:outline-none"
                                     placeholder="Description"
                                 ></textarea>
+
                             </div>
                         </div>
 
