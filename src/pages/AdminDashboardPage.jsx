@@ -50,7 +50,7 @@ function DashboardPage() {
     if (containerRef.current) {
       const container = containerRef.current;
       container.scrollLeft += scrollOffset;
-      
+
       // Update arrow visibility
       setShowLeftArrow(container.scrollLeft > 0);
       setShowRightArrow(
@@ -58,6 +58,18 @@ function DashboardPage() {
       );
     }
   };
+
+  function formatSeconds(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+  }
 
   return (
     <div className="flex flex-col sm:flex-row h-screen sm:h-auto w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-b ">
@@ -98,7 +110,7 @@ function DashboardPage() {
                 ref={containerRef}
               >
                 {projects.map((project) => {
-                  const totalHours = project.usuarios.reduce(
+                  const seconds = project.usuarios.reduce(
                     (acc, user) => acc + user.tiempoTrabajado,
                     0
                   );
@@ -109,7 +121,7 @@ function DashboardPage() {
                       label="Hours worked"
                       showDetails={handleShowDetails}
                       id={project.id}
-                      time={totalHours}
+                      time={formatSeconds(seconds)}
                       url={project.foto}
                     />
                   );
