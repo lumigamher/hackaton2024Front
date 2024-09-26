@@ -86,9 +86,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     };
 
     const handleCreateProyect = async () => {
-        console.log(newProyect);
-        // setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + image.name }))
-        console.log(newProyect);
+        setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + image.name }))
 
         const response = await proyectService.createProyect(newProyect);
         /* enviar foto */
@@ -111,16 +109,18 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         const file = e.target.files[0];
         if (file) {
             setImage(file);
+
             setIgmUrl(URL.createObjectURL(file));
-            setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + image.name }))
+            // setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + file.name }))
+
         }
     };
 
     useEffect(() => {
-        console.log(newProyect);
-
-
-
+        console.log(image);
+        if (image) {
+            setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + image.name }))
+        }
     }, [image])
 
     useEffect(() => {
