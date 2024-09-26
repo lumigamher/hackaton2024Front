@@ -3,7 +3,7 @@ import UserAvailableModal from "./UserAvailableModal";
 import AssignedTask from "./AssignedTask";
 import useFetchStaff from "../../hooks/useFetchStaff";
 import { default as axios } from "../../api/axiosInstace";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { proyectService } from "../../services/proyectService";
 useRef
 
@@ -21,6 +21,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         foto: "",
         usuarios: users,
         tareas: tasks,
+        foto: image
     });
 
     const handleChange = (e) => {
@@ -82,7 +83,9 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     };
 
     const handleCreateProyect = async () => {
-        const response = await proyectService.createProyect(newProyect);
+        console.log(newProyect);
+
+        // const response = await proyectService.createProyect(newProyect);
         if (await response.status === 201) {
             console.log("Proyecto guardado");
             handleClickModal();
@@ -101,8 +104,19 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         const file = e.target.files[0];
         if (file) {
             setImage(URL.createObjectURL(file));
+
+
+
         }
+
     };
+
+    useEffect(() => {
+        setNewProyect((prevData) => ({ ...prevData, foto: image }))
+        console.log(newProyect);
+        
+    }, [image])
+
 
     return (
         <div className="absolute w-screen h-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
@@ -135,14 +149,14 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
                 <div className="w-[900px] grid grid-cols-1 lg:grid-cols-3 grid-rows-1 h-full mt-5 gap-5 overflow-y-auto">
                     <div className="col-start-1 col-end-4 lg:col-start-1 lg:col-end-3 grid grid-cols-1 lg:grid-cols-2 grid-rows-[175px_auto] lg:gap-5">
                         <div className="flex flex-col lg:flex-row gap-10 col-start-1 col-end-4">
-                            <div onClick={uploadImg} className="cursor-pointer"> <ProyectDisplay label="Select Photo" icon="bx bx-upload" />
+                            <div onClick={uploadImg} className="cursor-pointer"> <ProyectDisplay label="Select Photo" icon="bx bx-upload" url={image} />
                                 <input
                                     type="file"
                                     ref={imgInput}
                                     onChange={handleFileChange}
                                     style={{ display: 'none' }}
                                 />
-                                </div>
+                            </div>
                             <div>
                                 <textarea
                                     name="descripcion"
