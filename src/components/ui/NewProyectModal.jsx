@@ -87,7 +87,9 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
 
     const handleCreateProyect = async () => {
         console.log(newProyect);
-        setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + image.name }))
+        // setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + image.name }))
+        console.log(newProyect);
+
         const response = await proyectService.createProyect(newProyect);
         /* enviar foto */
         uploadFile(image)
@@ -110,7 +112,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         if (file) {
             setImage(file);
             setIgmUrl(URL.createObjectURL(file));
-
+            setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + image.name }))
         }
     };
 
