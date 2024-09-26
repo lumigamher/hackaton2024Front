@@ -168,7 +168,10 @@ function UserDashboardPage() {
         showTaskModal ? (
           <ProyectPrevisualizerUser
             project={project}
-            close={handleshowTaskModal} />
+            close={handleshowTaskModal}
+            handleview={handleshowTaskModal}
+            />
+
         ) : null
       }
     </div>

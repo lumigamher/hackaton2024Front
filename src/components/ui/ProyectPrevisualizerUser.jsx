@@ -2,22 +2,26 @@ import { useEffect, useState } from 'react';
 import SelectTaskByUser from '../ui/SelectTaskByUser'
 import { userService } from '../../services/userService';
 
-export default function ProyectPrevisualizerUser({ close, project }) {
+export default function ProyectPrevisualizerUser({ close, project, handleview }) {
     const [selectedTask, setSelectedTask] = useState([])
 
     const handleTaskSelection = (e, id) => {
         console.log(id);
-        setSelectedTask((prev) => [...prev, {id: id, usuario: localStorage.getItem('id')}])
+        setSelectedTask((prev) => [...prev, {
+            tareaId: id,
+            usuarioId: localStorage.getItem('id')
+        }])
     }
 
     const handleSaveTaskSeletion = async () => {
-        // console.log(selectedTask);
+        console.log(selectedTask);
         const response = await userService.assignTaskToUser(selectedTask)
-        if (response === 200) {
-            console.log('OUkey');
-            
+        console.log(response);
+        if (response.status == 200) {
+            handleview()
         }
     }
+
 
     return (
         <div className="absolute h-screen w-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
@@ -42,9 +46,9 @@ export default function ProyectPrevisualizerUser({ close, project }) {
                             {
                                 project.tareas.map(tarea => (
                                     <SelectTaskByUser
-                                    key={tarea.id}
-                                    task={tarea}
-                                    handleClick={handleTaskSelection}
+                                        key={tarea.id}
+                                        task={tarea}
+                                        handleClick={handleTaskSelection}
                                     />
                                 ))
                             }
