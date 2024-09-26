@@ -60,12 +60,12 @@ function DashboardPage() {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row h-screen sm:h-auto w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-b">
+    <div className="flex flex-col sm:flex-row h-screen sm:h-auto w-screen overflow-x-hidden overflow-y-auto bg-gradient-to-b ">
       <div className="w-full sm:w-6 bg-white">
         <h2 className="translate-y-7 rotate-90 font-bold select-none">ChroniX</h2>
       </div>
 
-      <div className="flex h-fit lg:h-full w-full flex-col gap-3 p-8">
+      <div className="flex h-fit lg:h-full w-full flex-col gap-10 p-8">
         <div className="flex w-full justify-end">
           <p className="text-sm">
             <button
@@ -80,7 +80,7 @@ function DashboardPage() {
         <div>
           <p className="text-sm text-gray-500 select-none">Admin</p>
           <div className="flex flex-col sm:flex-row gap-5">
-            <h2 className="text-2xl font-semibold select-none">Hi, Luis!</h2>
+            <h2 className="text-2xl font-semibold select-none">Hi, {localStorage.getItem('username')}!</h2>
             <Input
               type="text"
               className="w-full sm:w-64 rounded-lg border-2 border-gray-100 focus:border-none focus:outline-none"
@@ -94,7 +94,7 @@ function DashboardPage() {
             <AddNewProyect handleClick={handleModalView} />
             {projects.length > 0 && (
               <div
-                className="flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth flex-grow"
+                className="flex overflow-x-auto space-x-4  scrollbar-hide scroll-smooth flex-grow"
                 ref={containerRef}
               >
                 {projects.map((project) => {
@@ -138,7 +138,7 @@ function DashboardPage() {
         {project && (
           <div>
             <div className="w-full flex justify-between">
-              <p className="text-orange-600 select-none">{project.nombre} staff</p>
+              <p className="text-orange-600 mb-5 select-none">{project.nombre} staff</p>
               <button
                 className="hover:text-red-600 hover:scale-125 hover:font-semibold pl-10 -translate-x-5 select-none duration-300"
                 onClick={() => setProject(null)}
@@ -148,7 +148,7 @@ function DashboardPage() {
             </div>
             <StaffDisplay projectIn={project} />
             <div className="w-full flex justify-between">
-              <p className="text-orange-600 select-none ">{project.nombre} Task</p>
+              <p className="text-orange-600 select-none mb-5 ">{project.nombre} Task</p>
             </div>
             <div className="w-full h-auto flex gap-5 flex-wrap">
               {project.tareas.map((tarea) => (

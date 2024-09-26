@@ -169,7 +169,7 @@ function UserDashboardPage() {
                 clear
               </button>
             </div>
-            <div className="w-full h-auto flex gap-5 flex-wrap">
+            <div className="w-full h-auto flex gap-5 mt-5 flex-wrap">
               {project.tareas.map((tarea) => (
                 tasks.includes(tarea.id) ? <TaskCard key={tarea.id} task={tarea} /> : null
               ))}
