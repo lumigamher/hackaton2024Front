@@ -118,7 +118,7 @@ function DashboardPage() {
             )}
             {showLeftArrow && (
               <button
-                onClick={() => scroll(-390)}
+                onClick={() => scroll(-395)}
                 className="absolute top-1/2 left-[195px] -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 z-10"
               >
                 &#8249; {/* Left arrow character */}
@@ -126,7 +126,7 @@ function DashboardPage() {
             )}
             {showRightArrow && (
               <button
-                onClick={() => scroll(390)}
+                onClick={() => scroll(395)}
                 className="absolute top-1/2 right-4 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 z-10"
               >
                 &#8250; {/* Right arrow character */}
