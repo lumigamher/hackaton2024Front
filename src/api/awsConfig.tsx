@@ -1,13 +1,12 @@
-import AWS from 'aws-sdk';
 
-AWS.config.update({
-  accessKeyId: 'AKIA2CUNLQGQMIKPLUER',
-  secretAccessKey: "g'D0d77&",
-  region: 'us-east-1'
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+
+const s3 = new S3Client({
+    region: 'us-east-1',
+    credentials: {
+        accessKeyId: 'AKIA2CUNLQGQFFLBH3GL',
+        secretAccessKey: "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"
+    }
 });
-
-
-
-const s3 = new AWS.S3();
 
 export default s3;

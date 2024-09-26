@@ -163,11 +163,11 @@ function DashboardPage() {
             <div className="w-full flex justify-between">
               <p className="text-orange-600 select-none mb-5 ">{project.nombre} Task</p>
             </div>
-            <div className="w-full h-auto flex gap-5 flex-wrap">
+            {/* <div className="w-full h-auto flex gap-5 flex-wrap">
               {project.tareas.map((tarea) => (
                 <Cronometro key={tarea.id} task={tarea} />
               ))}
-            </div>
+            </div> */}
           </div>
         )}
       </div>
