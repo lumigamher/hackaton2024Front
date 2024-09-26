@@ -84,7 +84,7 @@ const Cronometro = ({ task, id, handleClick, icon = 'bx bxs-right-top-arrow-circ
   };
 
   return (
-    <div className='relative w-[175px] h-[175px] select-none p-5 bg-gradient-to-br from-orange-200 via-yellow-300 to-orange-400 shadow-lg flex flex-col justify-between items-center rounded-2xl'>
+    <div className='relative w-[200px] h-[200px] select-none p-5 bg-gradient-to-br from-orange-200 via-yellow-300 to-orange-400 shadow-lg flex flex-col justify-between items-center rounded-2xl'>
       {/* Ícono de la esquina superior derecha */}
       <div className='absolute top-2 right-2'>
         <button className='text-xs text-gray-600'>
