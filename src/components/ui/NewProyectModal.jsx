@@ -105,18 +105,20 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
         if (file) {
             setImage(URL.createObjectURL(file));
 
-
-
         }
-
     };
 
     useEffect(() => {
+        console.log(image);
         setNewProyect((prevData) => ({ ...prevData, foto: image }))
-        console.log(newProyect);
         
     }, [image])
 
+    useEffect(() => {
+        console.log(newProyect);
+        
+    }, [newProyect])
+    
 
     return (
         <div className="absolute w-screen h-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
