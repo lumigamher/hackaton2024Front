@@ -10,15 +10,12 @@
     font-family: "Inter", sans-serif;
 }
 
-::-webkit-scrollbar {
-    background-color:  rgb(255, 255, 255);
-    border-radius: 10rem;
-    height: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #ff5b24b6;
-    border-radius: 10rem;
-    user-select: none;
-}
-
+@layer utilities {
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
