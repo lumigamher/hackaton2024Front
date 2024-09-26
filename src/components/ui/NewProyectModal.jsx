@@ -87,7 +87,7 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
 
     const handleCreateProyect = async () => {
         console.log(newProyect);
-
+        setNewProyect((prevData) => ({ ...prevData, foto: "https://chronix-almacenamiento.s3.amazonaws.com/" + image.name }))
         const response = await proyectService.createProyect(newProyect);
         /* enviar foto */
         uploadFile(image)
@@ -115,8 +115,9 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     };
 
     useEffect(() => {
-        console.log(image);
-        // setNewProyect((prevData) => ({ ...prevData, foto: image }))
+        console.log(newProyect);
+
+
 
     }, [image])
 
@@ -126,20 +127,20 @@ function NewProyectModal({ handleClickModal, handleSubmit }) {
     }, [newProyect])
     const uploadFile = async (file) => {
         const params = {
-          Bucket: 'chronix-almacenamiento',
-          Key: file.name,                 
-          Body: file,                      
-          ContentType: file.type           
+            Bucket: 'chronix-almacenamiento',
+            Key: file.name,
+            Body: file,
+            ContentType: file.type
         };
-      
+
         try {
-          const data = await s3.send(new PutObjectCommand(params));
-          console.log('File uploaded successfully:', data);
+            const data = await s3.send(new PutObjectCommand(params));
+            console.log('File uploaded successfully:', data);
         } catch (err) {
-          console.log('Error uploading file:', err);
+            console.log('Error uploading file:', err);
         }
-      };
-      
+    };
+
 
     return (
         <div className="absolute w-screen h-screen backdrop-blur-sm lg:grid lg:grid-cols-4 lg:grid-rows-6">
