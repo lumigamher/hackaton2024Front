@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
-import { Typography, Button } from '@mui/material';
+import PropTypes from 'prop-types';
 
-const Cronometro = () => {
-  const [duracion, setDuracion] = useState(0); 
-  const [isRunning, setIsRunning] = useState(false); 
-  const [stompClient, setStompClient] = useState(null); 
+const Cronometro = ({ task, id, handleClick, icon = 'bx bxs-right-top-arrow-circle text-white text-lg' }) => {
+  const [duracion, setDuracion] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const [stompClient, setStompClient] = useState(null);
 
   useEffect(() => {
     // Conectar al WebSocket
@@ -15,22 +15,21 @@ const Cronometro = () => {
 
     client.connect({}, () => {
       console.log("Conexión WebSocket exitosa");
-      client.subscribe('/topic/cronometro', (message) => {
+      client.subscribe(`/topic/cronometro/${task.id}`, (message) => {
         const receivedMessage = JSON.parse(message.body);
-        console.log("Mensaje recibido:", receivedMessage); 
-        
+        console.log("Mensaje recibido para tarea:", task.id, receivedMessage);
+
         if (receivedMessage.fechaInicio) {
-            console.log("Iniciando cronómetro..."); 
-            setDuracion(0); 
-            setIsRunning(true); 
+          console.log("Iniciando cronómetro para tarea:", task.id);
+          setDuracion(0);
+          setIsRunning(true);
         }
-        
+
         if (receivedMessage.fechaFin) {
-            console.log("Deteniendo cronómetro..."); 
-            setIsRunning(false); 
+          console.log("Deteniendo cronómetro para tarea:", task.id);
+          setIsRunning(false);
         }
-    });
-    
+      });
     });
 
     setStompClient(client);
@@ -40,21 +39,17 @@ const Cronometro = () => {
         client.disconnect();
       }
     };
-  }, []);
+  }, [task.id]);
 
   useEffect(() => {
-    console.log("Estado isRunning:", isRunning); 
-
     let interval;
     if (isRunning) {
-      console.log("Cronómetro está corriendo"); 
       interval = setInterval(() => {
-        setDuracion((prevDuracion) => prevDuracion + 1000); 
+        setDuracion((prevDuracion) => prevDuracion + 1000);
       }, 1000);
     }
     return () => {
       if (interval) {
-        console.log("Limpiando intervalo..."); 
         clearInterval(interval);
       }
     };
@@ -63,12 +58,10 @@ const Cronometro = () => {
   const iniciarCronometro = () => {
     if (stompClient && stompClient.connected) {
       const cronometro = {
-        usuario: 'Usuario', 
+        usuario: 'Usuario',
+        taskId: task.id // Asociar la tarea con el mensaje
       };
-      console.log("Enviando mensaje para iniciar cronómetro..."); 
       stompClient.send('/app/iniciar', {}, JSON.stringify(cronometro));
-    } else {
-      console.log("No hay conexión WebSocket establecida");
     }
   };
 
@@ -76,11 +69,11 @@ const Cronometro = () => {
     if (stompClient && stompClient.connected) {
       const cronometro = {
         usuario: 'Usuario',
+        taskId: task.id // Asociar la tarea con el mensaje
       };
-      console.log("Enviando mensaje para detener cronómetro..."); 
       stompClient.send('/app/detener', {}, JSON.stringify(cronometro));
     }
-    setIsRunning(false); 
+    setIsRunning(false);
   };
 
   const calcularDuracion = () => {
@@ -91,22 +84,51 @@ const Cronometro = () => {
   };
 
   return (
-    <div>
-      <div style={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
-        <Button variant="contained" onClick={iniciarCronometro} disabled={isRunning}>
-          Iniciar Cronómetro
-        </Button>
-        
-        <Button variant="contained" onClick={detenerCronometro} disabled={!isRunning} style={{ marginLeft: '10px' }}>
-          Detener Cronómetro
-        </Button>
+    <div className='relative w-[175px] h-[175px] select-none p-5 bg-gradient-to-br from-orange-200 via-yellow-300 to-orange-400 shadow-lg flex flex-col justify-between items-center rounded-2xl'>
+      {/* Ícono de la esquina superior derecha */}
+      <div className='absolute top-2 right-2'>
+        <button className='text-xs text-gray-600'>
+          <i id={id} onClick={handleClick} className={`text-gray-400 ml-2 text-2xl bx ${icon}`} />
+        </button>
       </div>
 
-      <Typography variant="h6" style={{ marginTop: '20px' }}>
-        Tiempo transcurrido: {calcularDuracion()}
-      </Typography>
+      {/* Título de la tarea */}
+      <h2 className='text-sm font-semibold text-gray-800 self-start'>{task.nombre}</h2>
+
+      {/* Cronómetro */}
+      <div className='text-2xl font-mono text-gray-800'>
+        {calcularDuracion()}
+      </div>
+
+      {/* Botones: Start y Pausa */}
+      <div className='flex items-center space-x-2 self-start'>
+        <button
+          className='px-4 py-2 bg-white text-yellow-600 rounded-full shadow-md'
+          onClick={iniciarCronometro}
+          disabled={isRunning}
+        >
+          Start
+        </button>
+        <button
+          className='px-4 py-2 bg-white text-yellow-600 rounded-full shadow-md'
+          onClick={detenerCronometro}
+          disabled={!isRunning}
+        >
+          Pausar
+        </button>
+      </div>
     </div>
   );
+};
+
+Cronometro.propTypes = {
+  task: PropTypes.shape({
+    nombre: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }).isRequired,
+  handleClick: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  icon: PropTypes.string,
 };
 
 export default Cronometro;

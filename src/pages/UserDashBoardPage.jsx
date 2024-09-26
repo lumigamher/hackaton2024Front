@@ -3,9 +3,9 @@ import Input from '../components/ui/Input';
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { proyectService } from '../services/proyectService';
-import TaskCard from '../components/ui/TaskCard';
 import { userService } from '../services/userService';
 import ProyectPrevisualizerUser from '../components/ui/ProyectPrevisualizerUser'
+import Cronometro from '../components/ui/Cronometro';
 
 function UserDashboardPage() {
   const [projects, setProjects] = useState([]);
@@ -172,7 +172,7 @@ function UserDashboardPage() {
             </div>
             <div className="w-full h-auto flex gap-5 mt-5 flex-wrap">
               {project.tareas.map((tarea) => (
-                tasks.includes(tarea.id) ? <TaskCard key={tarea.id} task={tarea} /> : null
+                tasks.includes(tarea.id) ? <Cronometro key={tarea.id} task={tarea} /> : null
               ))}
             </div>
           </div>

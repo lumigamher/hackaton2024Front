@@ -7,6 +7,7 @@ import { useAuth } from '../hooks/useAuth';
 import { proyectService } from '../services/proyectService';
 import StaffDisplay from '../components/StaffDisplay';
 import TaskCard from '../components/ui/TaskCard';
+import Cronometro from '../components/ui/Cronometro';
 
 function DashboardPage() {
   const [showNewProyectModal, setShowNewProyectModal] = useState(false);
@@ -164,7 +165,7 @@ function DashboardPage() {
             </div>
             <div className="w-full h-auto flex gap-5 flex-wrap">
               {project.tareas.map((tarea) => (
-                <TaskCard key={tarea.id} task={tarea} />
+                <Cronometro key={tarea.id} task={tarea} />
               ))}
             </div>
           </div>
